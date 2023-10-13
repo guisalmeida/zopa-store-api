@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 
 import Home from './routes/home'
-import Topbar from './components/topbar'
+import Layout from './components/layout'
 import Authentication from './routes/authentication'
 import Shop from './routes/shop'
 import Product from './routes/product'
@@ -11,7 +11,7 @@ import Category from './routes/category'
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Topbar />}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="shop/*" element={<Shop />}>
           <Route path=":category" element={<Category />} />
