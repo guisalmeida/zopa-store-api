@@ -26,6 +26,6 @@ export const CheckoutContainer = styled.div`
     .checkout__total {
         margin-top: 30px;
         margin-left: auto;
-        font-size: 2.4rem;
+        font-size: 2.3rem;
     }
 `

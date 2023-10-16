@@ -41,7 +41,6 @@ html input {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Noto Sans SC', sans-serif;
-    font-size: 10px;
     font-weight: 400;
 }
 
@@ -49,7 +48,6 @@ body {
     background-color:var(--light-grey);
     color:var(--dark);
     font-family: 'Noto Sans SC', sans-serif;
-    font-size: 1.6rem;
     font-weight: 400;
     min-height: 100%;
     overflow-x: hidden;
@@ -60,6 +58,10 @@ button {
     outline: none;
     border: none;
     background-color: transparent;
+}
+
+button, a {
+    cursor: pointer;
 }
 
 .container {

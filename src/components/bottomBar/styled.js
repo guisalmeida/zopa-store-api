@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Footer = styled.footer`
     border-top: 1px solid #e6e6e6;
-    height: 45px;
+    height: 3rem;
     width: 100%;
     font-size: .75rem;
     position: fixed;
@@ -27,8 +27,10 @@ export const Footer = styled.footer`
             text-decoration: none;
             color:var(--main-color);
 
-            &:hover {
-                text-decoration: underline;
+            @media (hover: hover){
+                &:hover {
+                    text-decoration: underline;
+                }
             }
         }
     }

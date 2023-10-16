@@ -14,9 +14,9 @@ const ProductsList = ({ products, category }) => {
   return (
     <ProductsContainer>
       {  
-        prodsArray.map((product) => {
+        prodsArray.map((product, index) => {
           return (
-            <ProductCard key={product.code_color} product={product} />
+            <ProductCard key={index} product={product} />
           );
         })
       }

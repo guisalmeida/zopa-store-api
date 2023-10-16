@@ -6,32 +6,27 @@ const CategoriesBar = () => {
   const products = SHOP_DATA
   const categoriesSet = new Set();
   const { category } = useParams();
-  
+
   products.forEach((product) => {
-    product.categories.forEach((cat) => {
-       
-      categoriesSet.add(cat);
-    });
+    product.categories.forEach((cat) => categoriesSet.add(cat));
   });
 
   return (
     <ProductsCategories>
       <ul>
-        {
-           
-          Array.from(categoriesSet).map((cat, index) => {
-            return (
-              <li key={index}>
-                <Link
-                  to={`${cat}`}
-                  className={category === cat ? "selected" : ""}
-                >
-                  {cat}
-                </Link>
-              </li>
-            );
-          })
-        }
+        {Array.from(categoriesSet).sort().map((cat, index) => {
+          return (
+            <li key={index}>
+              <Link
+                to={`${cat}`}
+                className={category === cat ? "selected" : ""}
+                style={cat === "sale" ? { color: "red" } : null}
+              >
+                {cat}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </ProductsCategories>
   );

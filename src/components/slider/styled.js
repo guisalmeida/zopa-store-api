@@ -24,7 +24,7 @@ export const SliderContainer = styled.div`
         background:var(--main-color);
         color:var(--white);
         width: 100%;
-        height: 55px;
+        height: 3rem;
         box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
         padding: 0 1.6rem;
         display: flex;
@@ -46,7 +46,7 @@ export const SliderContainer = styled.div`
         }
 
         .slider__title {
-            font-size: 1.4rem;
+            font-size: 1rem;
             font-weight: 700;
             margin: 0;
             width: 100%;
@@ -59,7 +59,7 @@ export const SliderContainer = styled.div`
         padding: 1.6rem;
         display: flex;
         flex-direction: column;
-        height: calc(100% - 55px);
+        height: calc(100% - 3rem);
         align-items: center;
 
         .button__container {

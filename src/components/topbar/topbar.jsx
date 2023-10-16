@@ -1,59 +1,65 @@
-import {useState} from 'react'
-import { Link, Outlet } from "react-router-dom";
-
-import BottomBar from "../bottomBar";
+import { useState } from 'react'
+import { Link } from "react-router-dom";
 import CartIcon from "../cartIcon";
-import MiniCart from "../miniCart";
 
 import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
 import { ReactComponent as ZopaLogo } from "../../assets/logo-zopa.svg";
+
+import { Menu } from "@styled-icons/ionicons-solid/Menu"
 
 import { TopbarContainer } from "./styled";
 
 const Topbar = () => {
   const [isShowCart, setIsShowCart] = useState(false)
 
+  const handleMobileMenu = ()=> console.log("menu");
+
   return (
-    <>
-      <MiniCart showCart={isShowCart} />
-
-      <TopbarContainer>
-        <div className="container">
-          <div className="topbar__links">
-            <Link to="/shop" className="topbar__link">
-              Shop
-            </Link>
-          </div>
-
-          <Link to="/">
-            <ZopaLogo className="logo" />
+    <TopbarContainer>
+      <div className="container">
+        <div className="topbar__links">
+          <Link to="/shop" className="topbar__link" title="Shop">
+            Shop
           </Link>
 
-          <div className="topbar__icons">
-            <Link to="/auth" className="topbar__link">
-              My account
-            </Link>
-
-            <button
-              type="button"
-              className="topbar__cart"
-              onClick={()=> setIsShowCart(!isShowCart)}
-            >
-              <CartIcon />
-            </button>
-            <button
-              type="button"
-              className="topbar__search"
-              onClick={() => console.log('search')}
-            >
-              <SearchIcon />
-            </button>
-          </div>
+          <button
+            type="button"
+            className="topbar__menu-mobile"
+            title="Menu"
+            onClick={() => handleMobileMenu(true)}
+          >
+            <Menu />
+          </button>
         </div>
-      </TopbarContainer>
-      <Outlet />
-      <BottomBar />
-    </>
+
+        <Link to="/" title="Home">
+          <ZopaLogo className="logo" />
+        </Link>
+
+        <div className="topbar__icons">
+          <Link to="/auth/signin" className="topbar__link" title="My Account">
+            My account
+          </Link>
+
+          <button
+            type="button"
+            className="topbar__cart"
+            title="My Cart"
+            onClick={() => setIsShowCart(!isShowCart)}
+          >
+            <CartIcon />
+          </button>
+          <button
+            type="button"
+            className="topbar__search"
+            title="Search"
+            onClick={() => console.log('search')}
+          >
+            <SearchIcon />
+          </button>
+        </div>
+      </div>
+    </TopbarContainer>
   );
 };
 

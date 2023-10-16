@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Carousel = styled.div`
-	margin: 54px 0 0;
+	margin: 3rem 0 0;
 
 	.swiper {
 		width: 100%;

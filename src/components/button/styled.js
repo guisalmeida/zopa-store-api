@@ -8,7 +8,7 @@ export const BaseButton = styled.button`
   letter-spacing: 0.5px;
   line-height: 50px;
   padding: 0 35px 0 35px;
-  font-size: 1.6rem;
+  font-size: 1rem;
   background-color: black;
   color: white;
   text-transform: uppercase;
@@ -19,21 +19,25 @@ export const BaseButton = styled.button`
   justify-content: center;
   align-items: center;
 
-  &:hover {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
+  @media (hover: hover){
+    &:hover {
+      background-color: white;
+      color: black;
+    }
   }
 `
 
 export const GoogleButton = styled(BaseButton)`
   background-color: #4285f4;
   color: white;
-
-  &:hover {
-    background-color: #357ae8;
-    border: none;
+  
+  @media (hover: hover){
+    &:hover {
+      background-color: #357ae8;
+      border: none;
+    }
   }
+
 `
 
 export const InvertedButton = styled(BaseButton)`
@@ -41,11 +45,14 @@ export const InvertedButton = styled(BaseButton)`
   color: black;
   border: 1px solid black;
 
-  &:hover {
-    background-color: black;
-    color: white;
-    border: none;
+  @media (hover: hover){
+    &:hover {
+      background-color: black;
+      color: white;
+      border: none;
+    }
   }
+
 `
 export const ButtonSpinner = styled(SpinnerContainer)`
   width: 30px;

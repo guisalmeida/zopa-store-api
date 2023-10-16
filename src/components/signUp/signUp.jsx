@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../button";
 import FormInput from "../input";
 
-import { SignInContainer } from "./styled";
+import { SignContainer, ButtonsContaner } from "../../routes/authentication/styled";
 
 const defaultFormFields = {
   displayName: "",
@@ -31,7 +31,7 @@ const SignUp = () => {
       console.log('form sent!')
       resetForm();
     } catch (error) {
-       
+
       if (error.code === "auth/email-already-in-use") {
         alert("Email already in use!!");
       }
@@ -48,9 +48,11 @@ const SignUp = () => {
   };
 
   return (
-    <SignInContainer>
-      <h2>Don&apos;t have an account?</h2>
-      <span>Sign up with your email and password</span>
+    <SignContainer>
+      <h2>Already have an account? <a href="/auth/signin">Sign In</a></h2>
+      
+      <h3>Sign up with your email and password</h3>
+
       <form onSubmit={handleSubmit}>
         <FormInput
           label="Display Name"
@@ -87,16 +89,18 @@ const SignUp = () => {
           onChange={handleChange}
           required
         />
-        <div className="buttons__container">
+
+        <ButtonsContaner>
           <Button buttonType="base" type="submit">
-            Sign Up
+            Sign In
           </Button>
           <Button buttonType="google" type="button" onClick={signUpWithGoogle}>
-            Sign Up With Google
+            Sign In With Google
           </Button>
-        </div>
+        </ButtonsContaner>
+
       </form>
-    </SignInContainer>
+    </SignContainer>
   );
 };
 

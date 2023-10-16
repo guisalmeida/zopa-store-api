@@ -7,16 +7,26 @@ import Shop from './routes/shop'
 import Product from './routes/product'
 import Checkout from './routes/checkout'
 import Category from './routes/category'
+import SignUp from "./components/signUp";
+import SignIn from "./components/signIn";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+
         <Route path="shop/*" element={<Shop />}>
           <Route path=":category" element={<Category />} />
         </Route>
-        <Route path="auth" element={<Authentication />} />
+
+        <Route path="auth/*" element={<Authentication />} >
+          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
+        </Route>
+
+
+
         <Route path="product/:id" element={<Product />} />
         <Route path="checkout" element={<Checkout />} />
       </Route>

@@ -1,14 +1,19 @@
 import styled from "styled-components"
+import media from 'styled-media-query'
 
 export const TopbarContainer = styled.header`
     width: 100%;
-    height: 55px;
+    height: 3rem;
     background:var(--white);
     border-bottom: 1px solid #e6e6e6;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 9;
+
+    ${media.lessThan('medium')`
+        padding: 1rem;
+    `}
     
     .container {
         width: 100%;
@@ -18,6 +23,10 @@ export const TopbarContainer = styled.header`
         align-items: center;
         justify-content: space-between;
         margin: 0 auto;
+        
+        ${media.lessThan('large')`
+            max-width: var(--break-medium);
+        `}
     }
 
     .logo {
@@ -49,10 +58,17 @@ export const TopbarContainer = styled.header`
             color: black;
             cursor: pointer;
             font-size: 1rem;
-            
-            &:hover {
-                text-decoration: underline;
+
+            ${media.lessThan('medium')`
+                display: none;
+            `}
+
+            @media (hover: hover){
+                &:hover {
+                    text-decoration: underline;
+                }
             }
+            
         }
     }
 
@@ -63,20 +79,37 @@ export const TopbarContainer = styled.header`
         align-items: center;
         justify-content: start;
 
+        .topbar__menu-mobile {
+            width: 20px;
+            height: 20px;
+            padding: 0;
+
+            ${media.greaterThan('medium')`
+                display: none;
+            `}
+        }
+        
         .topbar__search {
             height: 20px;
             width: 20px;
         }
-
+        
         .topbar__link {
             text-decoration: none;
             color: black;
             cursor: pointer;
             margin-right: 1.5rem;
+
+            ${media.lessThan('medium')`
+                display: none;
+            `}
             
-            &:hover {
-                text-decoration: underline;
+            @media (hover: hover){
+                &:hover {
+                    text-decoration: underline;
+                }
             }
+            
         }
     }
 `

@@ -27,7 +27,7 @@ export const ListItemInfo = styled.div`
 	.list__title {
 		margin: 0;
 		flex: 2;
-		font-size: 1.2rem;
+		font-size: 0.75rem;
 		font-weight: 700;
 		margin: 0 0 .5rem;
 		text-decoration: none;
@@ -35,7 +35,7 @@ export const ListItemInfo = styled.div`
 	}
 	
 	.list__size {
-		font-size: 1.2rem;
+		font-size: 0.75rem;
 		color:var(--grey);
 		margin: 0 0 .5rem;
 	}
@@ -46,7 +46,7 @@ export const ListItemPrices = styled.div`
 	text-align: right;
 	
 	.list__price {
-		font-size: 1.4rem;
+		font-size: 1rem;
 		font-weight: 700;
 		margin: 0 0 0.5rem;
 		color:var(--dark);
@@ -58,7 +58,7 @@ export const ListItemPrices = styled.div`
 		
 		&--installments {
 			color:var(--grey);
-			font-size: 1.2rem;
+			font-size: 0.75rem;
 			font-weight: 400;
 		}
 	}

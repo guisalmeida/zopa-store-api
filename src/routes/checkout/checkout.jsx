@@ -27,8 +27,8 @@ const Checkout = () => {
           <span>Remove</span>
         </div>
       </div>
-      {cartItems.map((cartItem) => {
-        return <CheckoutItem key={cartItem.code_color} cartItem={cartItem} />;
+      {cartItems.map((cartItem, index) => {
+        return <CheckoutItem key={index} cartItem={cartItem} />;
       })}
       <span className="checkout__total">
         Total:{" "}

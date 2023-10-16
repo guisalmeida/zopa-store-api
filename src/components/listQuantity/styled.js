@@ -18,11 +18,14 @@ export const ListQuantityContainer = styled.div`
 		padding: 0.2rem;
 		border: 0.1rem solid #212529;
 
-		&:hover {
-			background-color: #212529;
-			color: #fff;
-			border-color: #212529;
+		@media (hover: hover){
+			&:hover {
+				background-color: #212529;
+				color: #fff;
+				border-color: #212529;
+			}
 		}
+
 	}
 
 	.quantity__input {

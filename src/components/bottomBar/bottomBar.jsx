@@ -6,7 +6,7 @@ const BottomBar = () => {
       <div className="footer__content container">
         <p>
           © 2023 Zopa Clothing. Developed by{" "}
-          <a href="https://www.guisalmeida.com" target="_blank" rel="noreferrer">
+          <a href="https://www.guisalmeida.com" target="_blank" rel="noreferrer" title="Visit guisalmeida.com">
             guisalmeida.com
           </a>
         </p>

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Button from "../button";
 import Input from "../input";
 
-import { SignInContainer, ButtonsContaner } from "./styled";
+import { SignContainer, ButtonsContaner } from "../../routes/authentication/styled";
 
 const defaultFormFields = {
   email: "",
@@ -25,7 +25,7 @@ const SignIn = () => {
     try {
       resetForm();
     } catch (error) {
-       
+
       switch (error.code) {
         case "auth/wrong-password":
           alert("Incorrect Password!");
@@ -48,9 +48,12 @@ const SignIn = () => {
   };
 
   return (
-    <SignInContainer>
-      <h2>Already have an account?</h2>
-      <span>Sign in with your email and password</span>
+    <SignContainer>
+      <h2>Don&apos;t have an account? <a href="/auth/signup">Sign Up</a></h2>
+      
+
+      <h3>Sign in with your email and password</h3>
+
       <form onSubmit={handleSubmit}>
         <Input
           label="Email"
@@ -77,7 +80,7 @@ const SignIn = () => {
           </Button>
         </ButtonsContaner>
       </form>
-    </SignInContainer>
+    </SignContainer>
   );
 };
 

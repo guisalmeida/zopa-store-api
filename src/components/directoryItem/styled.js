@@ -47,18 +47,21 @@ export const DirectoryItemContainer = styled(Link)`
   margin: 0 30px 15px;
   overflow: hidden;
 
-  &:hover {
-    cursor: pointer;
-
-    & ${BackgroundImage} {
-      transform: scale(1.1);
-      transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
-    }
-
-    & ${DirectoryItemBodyContainer} {
-      opacity: 0.9;
+  @media (hover: hover){
+    &:hover {
+      cursor: pointer;
+  
+      & ${BackgroundImage} {
+        transform: scale(1.1);
+        transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+      }
+  
+      & ${DirectoryItemBodyContainer} {
+        opacity: 0.9;
+      }
     }
   }
+
 
   &:first-child {
     margin-right: 30px;

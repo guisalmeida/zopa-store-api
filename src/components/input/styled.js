@@ -2,13 +2,13 @@ import styled, {css} from 'styled-components';
 
 const shrinkLabelStyles = css`
   top: -14px;
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   color:var(--main-color);
 `
 
 export const FormLabel = styled.label`
   color:var(--sub-color);
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-weight: normal;
   position: absolute;
   pointer-events: none;
@@ -42,7 +42,7 @@ export const FormInput = styled.input`
 
 export const FormGroup = styled.div`
   position: relative;
-  margin: 45px 0;
+  margin: 3rem 0;
   
   input[type='password'] {
     letter-spacing: 0.3em;
