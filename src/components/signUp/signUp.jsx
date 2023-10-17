@@ -49,7 +49,7 @@ const SignUp = () => {
 
   return (
     <SignContainer>
-      <h2>Already have an account? <a href="/auth/signin">Sign In</a></h2>
+      <h2>Already have an account? <a href="/auth/sign-in">Sign In</a></h2>
       
       <h3>Sign up with your email and password</h3>
 

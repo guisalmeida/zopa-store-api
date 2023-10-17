@@ -21,8 +21,8 @@ function App() {
         </Route>
 
         <Route path="auth/*" element={<Authentication />} >
-          <Route path="signin" element={<SignIn />} />
-          <Route path="signup" element={<SignUp />} />
+          <Route path="sign-in" element={<SignIn />} />
+          <Route path="sign-up" element={<SignUp />} />
         </Route>
 
 
