@@ -1,6 +1,12 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Button from "../button";
-import FormInput from "../input";
+import FormInput from "../formInput";
+
+import {
+  createAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth
+} from "../../utils/firebase";
 
 import { SignContainer, ButtonsContaner } from "../../routes/authentication/styled";
 
@@ -22,17 +28,20 @@ const SignUp = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     if (password !== confirmPassword) {
+      // TODO implement toastfy instead alert
       alert('Password do not match!');
       return
     }
 
     try {
-      console.log('form sent!')
+      const { user } = await createAuthUserWithEmailAndPassword(email,password)
+      await createUserDocumentFromAuth(user, { displayName })
       resetForm();
     } catch (error) {
-
       if (error.code === "auth/email-already-in-use") {
+        // TODO implement toastfy instead alert
         alert("Email already in use!!");
       }
       console.error(error);
@@ -49,8 +58,8 @@ const SignUp = () => {
 
   return (
     <SignContainer>
-      <h2>Already have an account? <a href="/auth/sign-in">Sign In</a></h2>
-      
+      <h2>Already have an account? <Link to="/auth/sign-in">Sign In</Link></h2>
+
       <h3>Sign up with your email and password</h3>
 
       <form onSubmit={handleSubmit}>

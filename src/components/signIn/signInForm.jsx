@@ -1,7 +1,13 @@
 import { useState } from 'react'
+import { Link } from "react-router-dom";
+import {
+  createUserDocumentFromAuth,
+  signInWithGooglePopup,
+  signInAuthUserWithEmailAndPassword
+} from '../../utils/firebase'
 
 import Button from "../button";
-import Input from "../input";
+import FormInput from "../formInput";
 
 import { SignContainer, ButtonsContaner } from "../../routes/authentication/styled";
 
@@ -10,9 +16,18 @@ const defaultFormFields = {
   password: "",
 };
 
-const SignIn = () => {
+const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+
+  const resetForm = () => {
+    setFormFields(defaultFormFields);
+  };
+
+  const signInWithGoogle = async () => {
+    const { user } = await signInWithGooglePopup()
+    await createUserDocumentFromAuth(user)
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -23,14 +38,16 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
+      await signInAuthUserWithEmailAndPassword(email, password)
       resetForm();
     } catch (error) {
-
       switch (error.code) {
         case "auth/wrong-password":
+          // TODO implement toastfy instead alert
           alert("Incorrect Password!");
           break;
         case "auth/user-not-found":
+          // TODO implement toastfy instead alert
           alert("No user associated with this email!");
           break;
         default:
@@ -39,23 +56,14 @@ const SignIn = () => {
     }
   };
 
-  const resetForm = () => {
-    setFormFields(defaultFormFields);
-  };
-
-  const signInWithGoogle = async () => {
-    console.log("log google");
-  };
-
   return (
     <SignContainer>
-      <h2>Don&apos;t have an account? <a href="/auth/sign-up">Sign Up</a></h2>
-      
+      <h2>Don&apos;t have an account? <Link to="/auth/sign-up">Sign Up</Link></h2>
 
       <h3>Sign in with your email and password</h3>
 
       <form onSubmit={handleSubmit}>
-        <Input
+        <FormInput
           label="Email"
           type="email"
           name="email"
@@ -63,7 +71,7 @@ const SignIn = () => {
           onChange={handleChange}
           required
         />
-        <Input
+        <FormInput
           label="Password"
           type="password"
           name="password"
@@ -84,4 +92,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInForm;

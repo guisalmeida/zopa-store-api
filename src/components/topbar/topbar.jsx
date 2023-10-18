@@ -37,7 +37,7 @@ const Topbar = () => {
         </Link>
 
         <div className="topbar__icons">
-          <Link to="/auth/signin" className="topbar__link" title="My Account">
+          <Link to="/auth/sign-in" className="topbar__link" title="My Account">
             My account
           </Link>
 

@@ -1,16 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 
 import CategoriesBar from "../../components/categoriesBar";
-import Categories from "../categories";
-import Category from "../category";
+import Products from "../products";
 
 const Shop = () => {  
   return (
     <>
       <CategoriesBar />
       <Routes>
-        <Route index element={<Categories />} />
-        <Route path=":category" element={<Category />} />
+        <Route index element={<Products />} />
+        <Route path=":category" element={<Products />} />
       </Routes>
     </>
   );
