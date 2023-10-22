@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const BackdropContainer = styled.div`
   position: fixed;
@@ -13,9 +13,10 @@ export const BackdropContainer = styled.div`
   z-index: 98;
   transition: all 0.3s ease-out;
 
-  ${(props) =>
-    props.$isShowCart && `
+  ${props =>
+    props.$isShowCart &&
+    `
     opacity: 1;
     visibility: visible;
   `}
-`;
+`

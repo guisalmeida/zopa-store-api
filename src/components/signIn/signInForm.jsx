@@ -1,64 +1,72 @@
-import { useState } from 'react'
-import { Link } from "react-router-dom";
+import { useState, useContext } from 'react'
+import { Link } from 'react-router-dom'
 import {
   createUserDocumentFromAuth,
   signInWithGooglePopup,
-  signInAuthUserWithEmailAndPassword
+  signInAuthUserWithEmailAndPassword,
 } from '../../utils/firebase'
+import { UserContext } from '../../context/userContext'
 
-import Button from "../button";
-import FormInput from "../formInput";
+import Button from '../button'
+import FormInput from '../formInput'
 
-import { SignContainer, ButtonsContaner } from "../../routes/authentication/styled";
+import {
+  SignContainer,
+  ButtonsContaner,
+} from '../../routes/authentication/styled'
 
 const defaultFormFields = {
-  email: "",
-  password: "",
-};
+  email: '',
+  password: '',
+}
 
 const SignInForm = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields);
-  const { email, password } = formFields;
+  const [formFields, setFormFields] = useState(defaultFormFields)
+  const { setCurrentUser } = useContext(UserContext)
+  const { email, password } = formFields
 
   const resetForm = () => {
-    setFormFields(defaultFormFields);
-  };
+    setFormFields(defaultFormFields)
+  }
 
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup()
     await createUserDocumentFromAuth(user)
-  };
+  }
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormFields({ ...formFields, [name]: value });
-  };
+  const handleChange = event => {
+    const { name, value } = event.target
+    setFormFields({ ...formFields, [name]: value })
+  }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async event => {
+    event.preventDefault()
 
     try {
-      await signInAuthUserWithEmailAndPassword(email, password)
-      resetForm();
+      const { user } = await signInAuthUserWithEmailAndPassword(email, password)
+      setCurrentUser(user)
+      resetForm()
     } catch (error) {
       switch (error.code) {
-        case "auth/wrong-password":
+        case 'auth/wrong-password':
           // TODO implement toastfy instead alert
-          alert("Incorrect Password!");
-          break;
-        case "auth/user-not-found":
+          alert('Incorrect Password!')
+          break
+        case 'auth/user-not-found':
           // TODO implement toastfy instead alert
-          alert("No user associated with this email!");
-          break;
+          alert('No user associated with this email!')
+          break
         default:
-          console.error(error);
+          console.error(error)
       }
     }
-  };
+  }
 
   return (
     <SignContainer>
-      <h2>Don&apos;t have an account? <Link to="/auth/sign-up">Sign Up</Link></h2>
+      <h2>
+        Don&apos;t have an account? <Link to="/auth/sign-up">Sign Up</Link>
+      </h2>
 
       <h3>Sign in with your email and password</h3>
 
@@ -89,7 +97,7 @@ const SignInForm = () => {
         </ButtonsContaner>
       </form>
     </SignContainer>
-  );
-};
+  )
+}
 
-export default SignInForm;
+export default SignInForm

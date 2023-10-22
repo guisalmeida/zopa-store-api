@@ -1,18 +1,24 @@
-import { useState } from 'react'
-import { Link } from "react-router-dom";
-import CartIcon from "../cartIcon";
+import { useState, useContext } from 'react'
+import { Link } from 'react-router-dom'
+import CartIcon from '../cartIcon'
+import { UserContext } from '../../context/userContext'
+import { ReactComponent as SearchIcon } from '../../assets/search-icon.svg'
+import { ReactComponent as ZopaLogo } from '../../assets/logo-zopa.svg'
+import { Menu } from '@styled-icons/ionicons-solid/Menu'
+import { signOutUser } from '../../utils/firebase'
 
-import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
-import { ReactComponent as ZopaLogo } from "../../assets/logo-zopa.svg";
-
-import { Menu } from "@styled-icons/ionicons-solid/Menu"
-
-import { TopbarContainer } from "./styled";
+import { TopbarContainer } from './styled'
 
 const Topbar = () => {
   const [isShowCart, setIsShowCart] = useState(false)
+  const { currentUser, setCurrentUser } = useContext(UserContext)
 
-  const handleMobileMenu = ()=> console.log("menu");
+  const handleMobileMenu = () => console.log('menu')
+
+  const signOutHandler = async () => {
+    await signOutUser()
+    setCurrentUser(null)
+  }
 
   return (
     <TopbarContainer>
@@ -37,9 +43,19 @@ const Topbar = () => {
         </Link>
 
         <div className="topbar__icons">
-          <Link to="/auth/sign-in" className="topbar__link" title="My Account">
-            My account
-          </Link>
+          {currentUser ? (
+            <button type="button" onClick={signOutHandler}>
+              Signout
+            </button>
+          ) : (
+            <Link
+              to="/auth/sign-in"
+              className="topbar__link"
+              title="My Account"
+            >
+              My account
+            </Link>
+          )}
 
           <button
             type="button"
@@ -60,7 +76,7 @@ const Topbar = () => {
         </div>
       </div>
     </TopbarContainer>
-  );
-};
+  )
+}
 
-export default Topbar;
+export default Topbar

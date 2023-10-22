@@ -1,3 +1,3 @@
-import ListQuantity from './listQuantity';
+import ListQuantity from './listQuantity'
 
-export default ListQuantity;
+export default ListQuantity

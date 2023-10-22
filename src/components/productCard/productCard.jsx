@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { ProductCardContainer } from './styled'
- 
+
 const ProductCard = ({ product }) => {
   return (
     <ProductCardContainer>
@@ -30,6 +31,18 @@ const ProductCard = ({ product }) => {
       </Link>
     </ProductCardContainer>
   )
+}
+
+ProductCard.propTypes = {
+  product: PropTypes.shape({
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    code_color: PropTypes.string.isRequired,
+    on_sale: PropTypes.bool.isRequired,
+    regular_price: PropTypes.string.isRequired,
+    actual_price: PropTypes.string.isRequired,
+    discount_percentage: PropTypes.string.isRequired,
+  }),
 }
 
 export default ProductCard

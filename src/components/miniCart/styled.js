@@ -1,5 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const CartEmpty = styled.p`
-    margin: auto 0;
+  margin: auto 0;
 `

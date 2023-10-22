@@ -1,3 +1,3 @@
-import CategoriesBar from "./categoriesBar";
+import CategoriesBar from './categoriesBar'
 
-export default CategoriesBar;
+export default CategoriesBar

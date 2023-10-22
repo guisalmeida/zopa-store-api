@@ -1,6 +1,6 @@
-import { ListQuantityContainer } from "./styled";
+import PropTypes from 'prop-types'
+import { ListQuantityContainer } from './styled'
 
- 
 const ListQuantity = ({ item }) => {
   return (
     <ListQuantityContainer>
@@ -8,7 +8,7 @@ const ListQuantity = ({ item }) => {
         type="button"
         className="quantity__button"
         onClick={() => {
-          if (item.quantity <= 1) return;
+          if (item.quantity <= 1) return
         }}
       >
         <svg
@@ -31,7 +31,7 @@ const ListQuantity = ({ item }) => {
       <button
         type="button"
         className="quantity__button"
-        onClick={() => console.log("qty")}
+        onClick={() => console.log('qty')}
       >
         <svg
           stroke="currentColor"
@@ -49,7 +49,13 @@ const ListQuantity = ({ item }) => {
         </svg>
       </button>
     </ListQuantityContainer>
-  );
-};
+  )
+}
 
-export default ListQuantity;
+ListQuantity.propTypes = {
+  item: PropTypes.shape({
+    quantity: PropTypes.number.isRequired,
+  }),
+}
+
+export default ListQuantity

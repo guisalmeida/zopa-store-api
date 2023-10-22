@@ -1,9 +1,9 @@
 import { SpinnerContainer, SpinnerOverlay } from './styled'
 
 const Spinner = () => (
-    <SpinnerOverlay>
-        <SpinnerContainer/>
-    </SpinnerOverlay>
-);
+  <SpinnerOverlay>
+    <SpinnerContainer />
+  </SpinnerOverlay>
+)
 
-export default Spinner;
+export default Spinner

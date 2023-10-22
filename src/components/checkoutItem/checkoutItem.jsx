@@ -1,7 +1,8 @@
-import ListQuantity from "../listQuantity";
-import { priceToNumber, priceToStringBr } from "../../utils/currency";
-import { CheckoutItemContainer, CheckoutItemFigure } from "./styled";
- 
+import PropTypes from 'prop-types';
+import ListQuantity from '../listQuantity'
+import { priceToNumber, priceToStringBr } from '../../utils/currency'
+import { CheckoutItemContainer, CheckoutItemFigure } from './styled'
+
 const CheckoutItem = ({ cartItem }) => {
   const {
     name,
@@ -11,16 +12,13 @@ const CheckoutItem = ({ cartItem }) => {
     image,
     selectedSize,
     on_sale,
-  } = cartItem;
+  } = cartItem
 
   const cartItems = []
-   
-  const handleDelete = () => console.log("delete");
 
-   
-  const { size } = cartItem.sizes.find(
-    (size) => size.sku === selectedSize
-  );
+  const handleDelete = () => console.log('delete')
+
+  const { size } = cartItem.sizes.find(size => size.sku === selectedSize)
 
   return (
     <CheckoutItemContainer>
@@ -28,7 +26,7 @@ const CheckoutItem = ({ cartItem }) => {
         <img
           src={
             image ||
-            "https://via.placeholder.com/470x594/FFFFFF/?text=Image+Not+Found"
+            'https://via.placeholder.com/470x594/FFFFFF/?text=Image+Not+Found'
           }
           alt={name}
         />
@@ -49,7 +47,19 @@ const CheckoutItem = ({ cartItem }) => {
         &#10005;
       </button>
     </CheckoutItemContainer>
-  );
-};
+  )
+}
 
-export default CheckoutItem;
+CheckoutItem.propTypes = {
+  cartItem: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    actual_price: PropTypes.string.isRequired,
+    regular_price: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    selectedSize: PropTypes.string.isRequired,
+    on_sale: PropTypes.bool.isRequired,
+  })
+}
+
+export default CheckoutItem

@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components"
-import "./reset.css";
+import { createGlobalStyle } from 'styled-components'
+import './reset.css'
 
 const GlobalStyles = createGlobalStyle`
 
@@ -69,4 +69,4 @@ button, a {
     max-width: var(--break-large);
 }
 `
-export default GlobalStyles;
+export default GlobalStyles

@@ -1,12 +1,13 @@
-import Backdrop from "../backdrop";
-import { SliderContainer } from "./styled";
+import PropTypes from 'prop-types'
+import Backdrop from '../backdrop'
+import { SliderContainer } from './styled'
 
 const Slider = ({ show, title, children }) => {
   return (
     <>
-      <SliderContainer $show={show} >
+      <SliderContainer $show={show}>
         <header className="slider__header">
-          <button className="slider__back" onClick={()=> console.log('close')}>
+          <button className="slider__back" onClick={() => console.log('close')}>
             &#10005;
           </button>
           <h3 className="slider__title">{title}</h3>
@@ -15,7 +16,13 @@ const Slider = ({ show, title, children }) => {
       </SliderContainer>
       <Backdrop />
     </>
-  );
-};
+  )
+}
 
-export default Slider;
+Slider.propTypes = {
+  show: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node,
+}
+
+export default Slider

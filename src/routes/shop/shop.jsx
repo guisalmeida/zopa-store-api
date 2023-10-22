@@ -1,9 +1,9 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom'
 
-import CategoriesBar from "../../components/categoriesBar";
-import Products from "../products";
+import CategoriesBar from '../../components/categoriesBar'
+import Products from '../products'
 
-const Shop = () => {  
+const Shop = () => {
   return (
     <>
       <CategoriesBar />
@@ -12,7 +12,7 @@ const Shop = () => {
         <Route path=":category" element={<Products />} />
       </Routes>
     </>
-  );
-};
+  )
+}
 
-export default Shop;
+export default Shop

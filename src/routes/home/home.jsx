@@ -1,6 +1,6 @@
-import { Carousel } from "../../components/carousel/carousel";
-import ProductsList from "../../components/productsList";
-import Spinner from "../../components/spinner/spinner";
+import { Carousel } from '../../components/carousel/carousel'
+import ProductsList from '../../components/productsList'
+import Spinner from '../../components/spinner/spinner'
 import SHOP_DATA from '../../../shop-data.js'
 
 const Home = () => {
@@ -10,12 +10,14 @@ const Home = () => {
   return (
     <>
       <Carousel />
-      
-      {isLoading ? <Spinner /> :
-        (<ProductsList products={products} category={undefined} />)
-      }
-    </>
-  );
-};
 
-export default Home;
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <ProductsList products={products} category={undefined} />
+      )}
+    </>
+  )
+}
+
+export default Home

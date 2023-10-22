@@ -1,64 +1,72 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import Button from "../button";
-import FormInput from "../formInput";
+import { useState, useContext } from 'react'
+import { Link } from 'react-router-dom'
+import Button from '../button'
+import FormInput from '../formInput'
+import { UserContext } from '../../context/userContext'
 
 import {
   createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth
-} from "../../utils/firebase";
+  createUserDocumentFromAuth,
+} from '../../utils/firebase'
 
-import { SignContainer, ButtonsContaner } from "../../routes/authentication/styled";
+import {
+  SignContainer,
+  ButtonsContaner,
+} from '../../routes/authentication/styled'
 
 const defaultFormFields = {
-  displayName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
+  displayName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+}
 
 const SignUp = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields);
-  const { displayName, email, password, confirmPassword } = formFields;
+  const [formFields, setFormFields] = useState(defaultFormFields)
+  const { displayName, email, password, confirmPassword } = formFields
+  const { setCurrentUser } = useContext(UserContext)
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormFields({ ...formFields, [name]: value });
-  };
+  const handleChange = event => {
+    const { name, value } = event.target
+    setFormFields({ ...formFields, [name]: value })
+  }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async event => {
+    event.preventDefault()
 
     if (password !== confirmPassword) {
       // TODO implement toastfy instead alert
-      alert('Password do not match!');
+      alert('Password do not match!')
       return
     }
 
     try {
-      const { user } = await createAuthUserWithEmailAndPassword(email,password)
+      const { user } = await createAuthUserWithEmailAndPassword(email, password)
+      setCurrentUser(user)
       await createUserDocumentFromAuth(user, { displayName })
-      resetForm();
+      resetForm()
     } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
+      if (error.code === 'auth/email-already-in-use') {
         // TODO implement toastfy instead alert
-        alert("Email already in use!!");
+        alert('Email already in use!!')
       }
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   const resetForm = () => {
-    setFormFields(defaultFormFields);
-  };
+    setFormFields(defaultFormFields)
+  }
 
   const signUpWithGoogle = () => {
     console.log('signup')
-  };
+  }
 
   return (
     <SignContainer>
-      <h2>Already have an account? <Link to="/auth/sign-in">Sign In</Link></h2>
+      <h2>
+        Already have an account? <Link to="/auth/sign-in">Sign In</Link>
+      </h2>
 
       <h3>Sign up with your email and password</h3>
 
@@ -107,10 +115,9 @@ const SignUp = () => {
             Sign In With Google
           </Button>
         </ButtonsContaner>
-
       </form>
     </SignContainer>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

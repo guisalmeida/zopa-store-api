@@ -1,13 +1,13 @@
-import CheckoutItem from "../../components/checkoutItem";
+import CheckoutItem from '../../components/checkoutItem'
 import PaymentForm from '../../components/paymentForm'
 
-import { priceToStringBr } from "../../utils/currency";
-import { CheckoutContainer } from "./styled";
+import { priceToStringBr } from '../../utils/currency'
+import { CheckoutContainer } from './styled'
 
 const Checkout = () => {
   const cartItems = []
   const cartItemsTotal = 0
-  
+
   return (
     <CheckoutContainer>
       <div className="checkout__header">
@@ -28,15 +28,14 @@ const Checkout = () => {
         </div>
       </div>
       {cartItems.map((cartItem, index) => {
-        return <CheckoutItem key={index} cartItem={cartItem} />;
+        return <CheckoutItem key={index} cartItem={cartItem} />
       })}
       <span className="checkout__total">
-        Total:{" "}
-        <strong>{priceToStringBr(cartItemsTotal)}</strong>
+        Total: <strong>{priceToStringBr(cartItemsTotal)}</strong>
       </span>
       <PaymentForm />
     </CheckoutContainer>
-  );
-};
+  )
+}
 
-export default Checkout;
+export default Checkout

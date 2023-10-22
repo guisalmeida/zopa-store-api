@@ -1,17 +1,15 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const BackgroundImage = styled.div`
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
-  background-image: ${({
-   
-  imageUrl }) => `url(${imageUrl})`};
+  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 `
 
-export const DirectoryItemBodyContainer = styled.div`
+export const CategoryItemBodyContainer = styled.div`
   height: 90px;
   padding: 0 25px;
   display: flex;
@@ -36,7 +34,7 @@ export const DirectoryItemBodyContainer = styled.div`
   }
 `
 
-export const DirectoryItemContainer = styled(Link)`
+export const CategoryItemContainer = styled(Link)`
   min-width: 30%;
   height: 400px;
   flex: 1 1 auto;
@@ -47,21 +45,20 @@ export const DirectoryItemContainer = styled(Link)`
   margin: 0 30px 15px;
   overflow: hidden;
 
-  @media (hover: hover){
+  @media (hover: hover) {
     &:hover {
       cursor: pointer;
-  
+
       & ${BackgroundImage} {
         transform: scale(1.1);
         transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
       }
-  
-      & ${DirectoryItemBodyContainer} {
+
+      & ${CategoryItemBodyContainer} {
         opacity: 0.9;
       }
     }
   }
-
 
   &:first-child {
     margin-right: 30px;
@@ -71,4 +68,3 @@ export const DirectoryItemContainer = styled(Link)`
     margin-left: 30px;
   }
 `
-

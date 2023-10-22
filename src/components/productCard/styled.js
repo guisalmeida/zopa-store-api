@@ -1,9 +1,9 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
 export const ProductCardContainer = styled.div`
-  background:var(--white);
-  border-radius: .5rem;
-  box-shadow: 0 .1rem .5rem rgba(0, 0, 0, 0.1);
+  background: var(--white);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1);
   text-align: center;
   overflow: hidden;
 
@@ -28,8 +28,8 @@ export const ProductCardContainer = styled.div`
     }
 
     .product-card__discount {
-      background:var(--dark);
-      color:var(--white);
+      background: var(--dark);
+      color: var(--white);
       padding: 0.2rem;
       font-size: 0.75rem;
       line-height: 1;
@@ -40,7 +40,7 @@ export const ProductCardContainer = styled.div`
   }
 
   .product-card__name {
-    color:var(--dark);
+    color: var(--dark);
     font-size: 1rem;
     font-weight: 700;
     text-decoration: none;
@@ -60,16 +60,15 @@ export const ProductCardContainer = styled.div`
 
     .product-card__price {
       font-size: 1rem;
-      color:var(--dark);
+      color: var(--dark);
       font-weight: bold;
 
       &--old {
         font-size: 0.75rem;
-        color:var(--grey);
+        color: var(--grey);
         text-decoration: line-through;
         margin-right: 1rem;
       }
     }
   }
 `
-

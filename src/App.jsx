@@ -14,10 +14,10 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="shop/*" element={<Shop />}/>
+        <Route path="shop/*" element={<Shop />} />
         <Route path="product/:id" element={<Product />} />
 
-        <Route path="auth/*" element={<Authentication />} >
+        <Route path="auth/*" element={<Authentication />}>
           <Route path="sign-in" element={<SignInForm />} />
           <Route path="sign-up" element={<SignUpForm />} />
         </Route>

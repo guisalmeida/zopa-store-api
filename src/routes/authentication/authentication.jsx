@@ -1,12 +1,12 @@
-import { AuthenticationContainer } from "./styled";
-import { Outlet } from "react-router-dom";
+import { AuthenticationContainer } from './styled'
+import { Outlet } from 'react-router-dom'
 
 const Authentication = () => {
   return (
     <AuthenticationContainer>
-      <Outlet/>
+      <Outlet />
     </AuthenticationContainer>
-  );
-};
+  )
+}
 
-export default Authentication;
+export default Authentication
