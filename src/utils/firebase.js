@@ -130,6 +130,8 @@ export const addCollectionsAndDocuments = async (
   objectsToAdd,
 ) => {
   const collectionRef = collection(db, collectionKey)
+
+  // Batch - Prevent lose data in the requests
   const batch = writeBatch(db)
 
   objectsToAdd.forEach(object => {

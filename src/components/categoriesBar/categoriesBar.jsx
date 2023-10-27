@@ -1,11 +1,13 @@
+import { useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { ProductsContext } from '../../context/productsContext'
 import { ProductsCategories } from './styled'
-import SHOP_DATA from '../../../shop-data.js'
 
 const CategoriesBar = () => {
-  const products = SHOP_DATA
-  const categoriesSet = new Set()
   const { category } = useParams()
+  const { products } = useContext(ProductsContext)
+  console.log(category)
+  const categoriesSet = new Set()
 
   products.forEach(product => {
     product.categories.forEach(cat => categoriesSet.add(cat))

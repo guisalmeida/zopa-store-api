@@ -78,7 +78,7 @@ ListItem.propTypes = {
     // }),
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    selectedSize: PropTypes.string.isRequired,
+    selectedSize: PropTypes.string,
     quantity: PropTypes.number.isRequired,
     on_sale: PropTypes.bool.isRequired,
     regular_price: PropTypes.string.isRequired,

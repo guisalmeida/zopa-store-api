@@ -5,6 +5,7 @@ import Layout from './components/layout'
 import Authentication from './routes/authentication'
 import Shop from './routes/shop'
 import Product from './routes/product'
+import Products from './routes/products'
 import Checkout from './routes/checkout'
 import SignInForm from './components/signIn/signInForm'
 import SignUpForm from './components/signUp'
@@ -14,7 +15,10 @@ function App() {
     <Routes>
       <Route exact path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="shop/*" element={<Shop />} />
+        <Route path="shop/*" element={<Shop />}>
+          <Route path=":category" element={<Products />} />
+        </Route>
+
         <Route path="product/:id" element={<Product />} />
 
         <Route path="auth/*" element={<Authentication />}>

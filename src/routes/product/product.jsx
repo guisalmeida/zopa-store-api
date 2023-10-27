@@ -1,4 +1,5 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { ProductsContext } from '../../context/productsContext'
 import { CartContext } from '../../context/cartContext'
 
@@ -6,15 +7,21 @@ import Spinner from '../../components/spinner/spinner'
 import { ProductContainer } from './styled'
 
 const Product = () => {
-  const { products } = useContext(ProductsContext)
   const { addToCart, setIsCartOpen } = useContext(CartContext)
+  const { products } = useContext(ProductsContext)
+  const { category } = useParams()
 
+  const [prods, setProds] = useState(products)
   const [selectedSize, setSelectedSize] = useState(null)
   const [sizeError, setSizeError] = useState(false)
 
   const isLoading = false
   const productId = window.location.pathname.split('/')[2]
-  const product = products.find(product => product.code_color === productId)
+  const product = prods.find(product => product.code_color === productId)
+
+  useEffect(() => {
+    setProds(products)
+  }, [category, products])
 
   const handleSize = sku => {
     if (sku === selectedSize) {
