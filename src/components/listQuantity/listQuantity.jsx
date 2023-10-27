@@ -1,7 +1,10 @@
+import { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { ListQuantityContainer } from './styled'
+import { CartContext } from '../../context/cartContext'
 
 const ListQuantity = ({ item }) => {
+  const { addToCart, removeFromCart } = useContext(CartContext)
   return (
     <ListQuantityContainer>
       <button
@@ -9,6 +12,7 @@ const ListQuantity = ({ item }) => {
         className="quantity__button"
         onClick={() => {
           if (item.quantity <= 1) return
+          removeFromCart(item)
         }}
       >
         <svg
@@ -31,7 +35,7 @@ const ListQuantity = ({ item }) => {
       <button
         type="button"
         className="quantity__button"
-        onClick={() => console.log('qty')}
+        onClick={() => addToCart(item)}
       >
         <svg
           stroke="currentColor"

@@ -2,11 +2,11 @@ import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../button'
 import FormInput from '../formInput'
-import { UserContext } from '../../context/userContext'
 
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
+  signInWithGooglePopup,
 } from '../../utils/firebase'
 
 import {
@@ -24,7 +24,6 @@ const defaultFormFields = {
 const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields)
   const { displayName, email, password, confirmPassword } = formFields
-  const { setCurrentUser } = useContext(UserContext)
 
   const handleChange = event => {
     const { name, value } = event.target
@@ -42,8 +41,8 @@ const SignUp = () => {
 
     try {
       const { user } = await createAuthUserWithEmailAndPassword(email, password)
-      setCurrentUser(user)
       await createUserDocumentFromAuth(user, { displayName })
+
       resetForm()
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
@@ -58,8 +57,8 @@ const SignUp = () => {
     setFormFields(defaultFormFields)
   }
 
-  const signUpWithGoogle = () => {
-    console.log('signup')
+  const signUpWithGoogle = async () => {
+    await signInWithGooglePopup()
   }
 
   return (

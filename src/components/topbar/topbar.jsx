@@ -1,7 +1,9 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import CartIcon from '../cartIcon'
 import { UserContext } from '../../context/userContext'
+import { CartContext } from '../../context/cartContext'
+import { SearchContext } from '../../context/searchContext'
 import { ReactComponent as SearchIcon } from '../../assets/search-icon.svg'
 import { ReactComponent as ZopaLogo } from '../../assets/logo-zopa.svg'
 import { Menu } from '@styled-icons/ionicons-solid/Menu'
@@ -10,15 +12,13 @@ import { signOutUser } from '../../utils/firebase'
 import { TopbarContainer } from './styled'
 
 const Topbar = () => {
-  const [isShowCart, setIsShowCart] = useState(false)
-  const { currentUser, setCurrentUser } = useContext(UserContext)
+  const { currentUser } = useContext(UserContext)
+  const { isCartOpen, setIsCartOpen } = useContext(CartContext)
+  const { isSearchOpen, setIsSearchOpen } = useContext(SearchContext)
 
-  const handleMobileMenu = () => console.log('menu')
-
-  const signOutHandler = async () => {
-    await signOutUser()
-    setCurrentUser(null)
-  }
+  const toggleIsCartOpen = () => setIsCartOpen(!isCartOpen)
+  const toggleIsSearchOpen = () => setIsSearchOpen(!isSearchOpen)
+  const handleMobileMenu = () => console.log('mobile menu')
 
   return (
     <TopbarContainer>
@@ -32,7 +32,7 @@ const Topbar = () => {
             type="button"
             className="topbar__menu-mobile"
             title="Menu"
-            onClick={() => handleMobileMenu(true)}
+            onClick={handleMobileMenu}
           >
             <Menu />
           </button>
@@ -44,7 +44,11 @@ const Topbar = () => {
 
         <div className="topbar__icons">
           {currentUser ? (
-            <button type="button" onClick={signOutHandler}>
+            <button
+              type="button"
+              className="topbar__link"
+              onClick={signOutUser}
+            >
               Signout
             </button>
           ) : (
@@ -61,7 +65,7 @@ const Topbar = () => {
             type="button"
             className="topbar__cart"
             title="My Cart"
-            onClick={() => setIsShowCart(!isShowCart)}
+            onClick={toggleIsCartOpen}
           >
             <CartIcon />
           </button>
@@ -69,7 +73,7 @@ const Topbar = () => {
             type="button"
             className="topbar__search"
             title="Search"
-            onClick={() => console.log('search')}
+            onClick={toggleIsSearchOpen}
           >
             <SearchIcon />
           </button>

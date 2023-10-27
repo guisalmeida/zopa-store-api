@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types'
-
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { priceToStringBr } from '../../utils/currency'
+import { CartContext } from '../../context/cartContext'
 
 import Slider from '../slider'
 import Button from '../button'
@@ -9,42 +8,44 @@ import ListItem from '../listItem'
 
 import { CartEmpty } from './styled'
 
-const MiniCart = ({ showCart }) => {
-  const navigate = useNavigate()
-
-  const cartItems = []
-  const cartItemsCount = 0
-  const cartItemsTotal = 0
+const MiniCart = () => {
+  const { cartProducts, cartCount, isCartOpen, setIsCartOpen } =
+    useContext(CartContext)
 
   const pathname = window.location.pathname || undefined
+  const navigate = useNavigate()
 
   const handleCheckout = () => {
-    return navigate('checkout')
+    setIsCartOpen(false)
+    navigate('checkout')
   }
+  const handleShowCart = bool => setIsCartOpen(bool)
 
   return (
-    <Slider show={showCart} title={`Cart - ${cartItemsCount} Item(s)`}>
-      {cartItems?.length > 0 ? (
-        cartItems.map((cartItem, index) => {
-          return <ListItem key={index} item={cartItem} />
+    <Slider
+      show={isCartOpen}
+      handleShow={handleShowCart}
+      title={`Cart - ${cartCount} Item(s)`}
+    >
+      {cartProducts?.length > 0 ? (
+        cartProducts.map((cartItem, index) => {
+          return <ListItem key={index} item={cartItem} mode="cart" />
         })
       ) : (
         <CartEmpty>Your cart is empty :(</CartEmpty>
       )}
-      <p>
-        <strong>Subtotal:</strong> {priceToStringBr(cartItemsTotal)}
-      </p>
-      {cartItems?.length > 0 && pathname !== '/checkout' && (
-        <Button buttonType="base" onClick={handleCheckout}>
-          Go to Cart
+
+      {cartProducts?.length > 0 && pathname !== '/checkout' && (
+        <Button
+          buttonType="base"
+          className="checkout__button"
+          onClick={handleCheckout}
+        >
+          Checkout
         </Button>
       )}
     </Slider>
   )
-}
-
-MiniCart.propTypes = {
-  showCart: PropTypes.bool.isRequired,
 }
 
 export default MiniCart

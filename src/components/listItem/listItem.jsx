@@ -1,21 +1,25 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react'
+import PropTypes from 'prop-types'
 import { priceToNumber, priceToStringBr } from '../../utils/currency'
 import ListQuantity from '../listQuantity'
-
+import { CartContext } from '../../context/cartContext'
 
 import {
   ListItemContainer,
   ListItemFigure,
   ListItemInfo,
   ListItemPrices,
-  RemoveButton,
+  RemoveIcon,
 } from './styled'
 
-const ListItem = ({ item }) => {
-  const cartItems = []
-  const handleDelete = () => console.log('delete')
+const ListItem = ({ item, mode }) => {
+  const { clearFromCart } = useContext(CartContext)
 
-  const { size } = item.sizes.find(size => size.sku === item.selectedSize)
+  const handleDelete = () => clearFromCart(item)
+
+  const { size } = item.selectedSize
+    ? item.sizes.find(size => size.sku === item.selectedSize)
+    : { size: undefined }
 
   return (
     <ListItemContainer>
@@ -31,22 +35,22 @@ const ListItem = ({ item }) => {
 
       <ListItemInfo>
         <h3 className="list__title">{item?.name}</h3>
+
         {size && (
           <p className="list__size">
             <span>{`Tam.: ${size}`}</span>
           </p>
         )}
 
-        {item?.quantity && <ListQuantity item={item} />}
-
-        {item?.quantity && (
-          <RemoveButton type="button" onClick={handleDelete}>
-            Remover
-          </RemoveButton>
-        )}
+        {mode === 'cart' && <ListQuantity item={item} />}
       </ListItemInfo>
 
       <ListItemPrices>
+        {mode === 'cart' && (
+          <button type="button" onClick={handleDelete}>
+            <RemoveIcon />
+          </button>
+        )}
         {item?.on_sale && (
           <p className="list__price list__price--old">
             {priceToStringBr(
@@ -67,11 +71,11 @@ const ListItem = ({ item }) => {
 
 ListItem.propTypes = {
   item: PropTypes.shape({
-    sizes: PropTypes.arrayOf({
-      available: PropTypes.bool.isRequired,
-      size: PropTypes.string.isRequired,
-      sku: PropTypes.string.isRequired
-    }),
+    // sizes: PropTypes.arrayOf({
+    //   available: PropTypes.bool.isRequired,
+    //   size: PropTypes.string.isRequired,
+    //   sku: PropTypes.string.isRequired,
+    // }),
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     selectedSize: PropTypes.string.isRequired,
@@ -79,8 +83,8 @@ ListItem.propTypes = {
     on_sale: PropTypes.bool.isRequired,
     regular_price: PropTypes.string.isRequired,
     actual_price: PropTypes.string.isRequired,
-    installments: PropTypes.string.isRequired,
-  })
+    // installments: PropTypes.string.isRequired,
+  }),
 }
 
 export default ListItem

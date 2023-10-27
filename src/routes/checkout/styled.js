@@ -1,31 +1,26 @@
 import styled from 'styled-components'
+import media from 'styled-media-query'
 
 export const CheckoutContainer = styled.div`
   min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 105px auto 0;
+  margin: 6rem auto 0;
   width: 100%;
   max-width: var(--break-large);
 
-  .checkout__header {
-    width: 100%;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid darkgrey;
-
-    .checkout__header--block {
-      text-transform: capitalize;
-      width: 20%;
-      text-align: center;
-    }
-  }
+  ${media.lessThan('large')`
+    max-width: var(--break-medium);
+  `}
 
   .checkout__total {
     margin-top: 30px;
     margin-left: auto;
-    font-size: 2.3rem;
+    font-size: 2rem;
+
+    ${media.lessThan('medium')`
+      margin: 1rem auto;
+    `}
   }
 `

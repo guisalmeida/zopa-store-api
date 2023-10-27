@@ -1,15 +1,15 @@
+import { useContext } from 'react'
 import { ReactComponent as CartIconSvg } from '../../assets/cart-icon.svg'
-
 import { CartIconCounter } from './styled'
 
+import { CartContext } from '../../context/cartContext'
+
 const CartIcon = () => {
-  const cartItemsCount = 0
+  const { cartCount } = useContext(CartContext)
 
   return (
     <>
-      {cartItemsCount > 0 ? (
-        <CartIconCounter>{cartItemsCount}</CartIconCounter>
-      ) : null}
+      {cartCount > 0 ? <CartIconCounter>{cartCount}</CartIconCounter> : null}
       <CartIconSvg />
     </>
   )

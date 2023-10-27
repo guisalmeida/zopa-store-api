@@ -4,6 +4,7 @@ export const SearchContainer = styled.div`
   box-shadow: 0 0.2rem 1rem 0 rgba(0, 0, 0, 0.1);
   background-color: var(--light-grey);
   padding: 1rem 1.6rem;
+  width: 100%;
 
   .search__input {
     width: 100%;
@@ -14,7 +15,7 @@ export const SearchContainer = styled.div`
     color: var(--dark);
     background: white;
     border-radius: 4px;
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-weight: 600;
     border: 1px;
   }
@@ -34,6 +35,10 @@ export const SearchContent = styled.div`
     flex-direction: column;
     overflow: auto;
 
+    .search__link {
+      text-decoration: none;
+    }
+
     .search__empty {
       width: 100%;
       text-align: center;
@@ -46,10 +51,6 @@ export const SearchContent = styled.div`
       margin: 0 auto;
       -webkit-transform: translate3d(0, -50%, 0);
       transform: translate3d(0, -50%, 0);
-
-      .search__link {
-        text-decoration: none;
-      }
     }
   }
 `

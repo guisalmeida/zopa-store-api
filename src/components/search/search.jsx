@@ -1,66 +1,61 @@
-import PropTypes from 'prop-types'
+import { useContext } from 'react'
 import { DebounceInput } from 'react-debounce-input'
 import { Link } from 'react-router-dom'
+import { ProductsContext } from '../../context/productsContext'
+import { SearchContext } from '../../context/searchContext'
+
+import ListItem from '../listItem'
 
 import Slider from '../slider'
-// import Quantity from '../../components/quantity';
-// import ListItem from '../../components/listItem';
-
-import SHOP_DATA from '../../../shop-data.js'
+// import Quantity from '../quantity'
 
 import * as Styled from './styled'
 
-const Search = ({ showSearch, handleShow }) => {
-  const { products } = SHOP_DATA
-  const search = []
+const Search = () => {
+  const { products } = useContext(ProductsContext)
+  const { search, setSearch, isSearchOpen, setIsSearchOpen } =
+    useContext(SearchContext)
+
+  const handleShowSearch = bool => setIsSearchOpen(bool)
 
   const handleSearch = event => {
     let query = event.target.value.trim()
-    // if (query === "") {
-    //     return dispatch(updateSearchAction([]));
-    // };
+    if (query === '') {
+      return setSearch([])
+    }
 
     const result = products.filter(({ name }) =>
       name.toLowerCase().includes(query),
     )
-    // dispatch(updateSearchAction(result))
-    console.log(result)
+    setSearch(result)
   }
 
   return (
-    <Slider show={showSearch} title="Buscar Produtos" handleShow={handleShow}>
+    <Slider show={isSearchOpen} title="Search" handleShow={handleShowSearch}>
       <Styled.SearchContainer>
         <DebounceInput
           type="text"
           className="search__input"
-          placeholder="Buscar por produto..."
+          placeholder="Search Products..."
           debounceTimeout={400}
           onChange={event => handleSearch(event)}
         />
       </Styled.SearchContainer>
 
       <Styled.SearchContent>
-        {/* {search.length > 0 && <Quantity length={search.length}/>} */}
+        {/* {search.length > 0 && <Quantity length={search.length} />} */}
 
         <div className="search__list">
           {search && search.length === 0 ? (
-            <p className="search__empty">Nenhum item encontrado :\</p>
+            <p className="search__empty">Product not found :\</p>
           ) : (
             search.map((prod, index) => (
               <Link
                 className="search__link"
-                to={`/produto/${prod.code_color}`}
+                to={`product/${prod.code_color}`}
                 key={index}
-                onClick={() => handleShow(false)}
               >
-                {/* <ListItem
-                  image={prod.image}
-                  name={prod.name}
-                  sale={prod.on_sale}
-                  oldPrice={prod.regular_price}
-                  price={prod.actual_price}
-                  installments={prod.installments}
-                /> */}
+                <ListItem item={prod} mode="search" />
               </Link>
             ))
           )}
@@ -68,11 +63,6 @@ const Search = ({ showSearch, handleShow }) => {
       </Styled.SearchContent>
     </Slider>
   )
-}
-
-Search.propTypes = {
-  showSearch: PropTypes.bool.isRequired,
-  handleShow: PropTypes.func.isRequired,
 }
 
 export default Search

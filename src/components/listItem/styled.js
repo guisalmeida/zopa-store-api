@@ -1,12 +1,14 @@
 import styled from 'styled-components'
+import { CloseCircle } from '@styled-icons/remix-fill/CloseCircle'
 
 export const ListItemContainer = styled.div`
   padding: 1.6rem;
-  border-bottom: 1px solid var(--grey);
+  border-bottom: 1px dashed var(--border);
   width: 100%;
   height: auto;
   display: flex;
   justify-content: space-between;
+  position: relative;
 `
 
 export const ListItemFigure = styled.figure`
@@ -23,11 +25,12 @@ export const ListItemInfo = styled.div`
   width: 50%;
   padding-left: 1rem;
   padding-right: 1rem;
+  text-decoration: none;
 
   .list__title {
     margin: 0;
     flex: 2;
-    font-size: 0.75rem;
+    font-size: 1rem;
     font-weight: 700;
     margin: 0 0 0.5rem;
     text-decoration: none;
@@ -35,7 +38,7 @@ export const ListItemInfo = styled.div`
   }
 
   .list__size {
-    font-size: 0.75rem;
+    font-size: 1rem;
     color: var(--grey);
     margin: 0 0 0.5rem;
   }
@@ -64,11 +67,13 @@ export const ListItemPrices = styled.div`
   }
 `
 
-export const RemoveButton = styled.button`
-  background: var(--red);
-  color: var(--white);
-  padding: 0.1rem 0.5rem;
-  border-radius: 5px;
-  font-weight: 700;
-  text-transform: uppercase;
+export const RemoveIcon = styled(CloseCircle)`
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: var(--grey);
+  background-color: var(--white);
+  border-radius: 1rem;
+  width: 1.6rem;
+  height: 1.6rem;
 `

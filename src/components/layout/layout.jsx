@@ -7,8 +7,8 @@ import Search from '../search'
 const Layout = () => {
   return (
     <>
-      <MiniCart showCart={false} />
-      <Search showSearch={false} handleShow={() => {}} />
+      <MiniCart />
+      <Search />
       <Topbar />
       <Outlet />
       <BottomBar />

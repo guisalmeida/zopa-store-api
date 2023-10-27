@@ -22,7 +22,7 @@ const CategoriesBar = () => {
                 <Link
                   to={`${cat}`}
                   className={category === cat ? 'selected' : ''}
-                  style={cat === 'sale' ? { color: 'red' } : null}
+                  style={cat === 'sale' ? { color: '#cf3838' } : null}
                 >
                   {cat}
                 </Link>

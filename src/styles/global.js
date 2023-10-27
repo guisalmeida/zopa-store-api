@@ -11,6 +11,7 @@ const GlobalStyles = createGlobalStyle`
     --light-grey: #f9f9f9;
     --white: #fff;
     --red: #cf3838;
+    --border: #e6e6e6;
 
     --break-small: 450px;
     --break-medium: 768px;

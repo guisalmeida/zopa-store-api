@@ -5,7 +5,7 @@ export const TopbarContainer = styled.header`
   width: 100%;
   height: 3rem;
   background: var(--white);
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid var(--border);
   position: fixed;
   top: 0;
   left: 0;

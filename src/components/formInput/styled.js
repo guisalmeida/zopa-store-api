@@ -7,7 +7,7 @@ const shrinkLabelStyles = css`
 `
 
 export const FormLabel = styled.label`
-  color: var(--sub-color);
+  color: var(--grey);
   font-size: 1rem;
   font-weight: normal;
   position: absolute;
@@ -22,13 +22,13 @@ export const FormLabel = styled.label`
 export const Input = styled.input`
   background: none;
   background-color: var(--light-grey);
-  color: var(--sub-color);
+  color: var(--grey);
   font-size: 1.8rem;
   padding: 10px 10px 10px 5px;
   display: block;
   width: 100%;
   border: none;
-  border-bottom: 1px solid var(--sub-color);
+  border-bottom: 1px solid var(--border);
   margin: 25px 0;
 
   &:focus {

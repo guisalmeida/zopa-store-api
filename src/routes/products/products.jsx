@@ -1,13 +1,12 @@
+import { useContext } from 'react'
 import { useParams } from 'react-router-dom'
-
+import { ProductsContext } from '../../context/productsContext'
 import ProductsList from '../../components/productsList'
 import Spinner from '../../components/spinner/spinner'
 
-import SHOP_DATA from '../../../shop-data.js'
-
 const Products = () => {
   const { category } = useParams()
-  const products = SHOP_DATA
+  const { products } = useContext(ProductsContext)
   const isLoading = false
 
   return isLoading ? (

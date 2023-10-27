@@ -4,7 +4,7 @@ export const SliderContainer = styled.div`
   background: var(--light-grey);
   height: 100%;
   width: 100%;
-  max-width: 375px;
+  max-width: 412px;
   position: fixed;
   top: 0;
   right: 0;
@@ -56,7 +56,7 @@ export const SliderContainer = styled.div`
   }
 
   .slider__content {
-    padding: 1.6rem;
+    position: relative;
     display: flex;
     flex-direction: column;
     height: calc(100% - 3rem);
@@ -66,6 +66,13 @@ export const SliderContainer = styled.div`
       position: absolute;
       bottom: 1.6rem;
       width: calc(100% - 3.2rem);
+    }
+
+    .checkout__button {
+      position: absolute;
+      bottom: 1rem;
+      width: calc(100% - 2rem);
+      margin: 0 1rem;
     }
   }
 `

@@ -6,7 +6,7 @@ export const ProductsCategories = styled.nav`
   height: 3rem;
   background: white;
   margin: 3rem 0 0;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,14 +17,14 @@ export const ProductsCategories = styled.nav`
     max-width: var(--break-large);
 
     ${media.lessThan('large')`
-            max-width: var(--break-medium);
-        `}
+        max-width: var(--break-medium);
+    `}
 
     ${media.lessThan('medium')`
             padding: 0 1rem;
         `}
 
-        a {
+    a {
       text-decoration: none;
       color: var(--main-color);
       text-transform: capitalize;

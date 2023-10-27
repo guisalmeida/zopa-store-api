@@ -4,6 +4,9 @@ import App from './App.jsx'
 
 import { BrowserRouter } from 'react-router-dom'
 import { UserProvider } from './context/userContext.jsx'
+import { ProductsProvider } from './context/productsContext.jsx'
+import { CartProvider } from './context/cartContext.jsx'
+import { SearchProvider } from './context/searchContext.jsx'
 
 import GlobalStyles from './styles/global'
 
@@ -12,7 +15,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <GlobalStyles />
       <UserProvider>
-        <App />
+        <ProductsProvider>
+          <CartProvider>
+            <SearchProvider>
+              <App />
+            </SearchProvider>
+          </CartProvider>
+        </ProductsProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,

@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
               product.image ||
               'https://via.placeholder.com/470x594/FFFFFF/?text=Image+Not+Found'
             }
-            alt={`Produto ${product.name}`}
+            alt={`Product ${product.name}`}
             title={product.name}
           />
         </figure>

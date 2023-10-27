@@ -18,10 +18,12 @@ export const BaseButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 0.5rem;
+  transition: all ease 0.3s;
 
   @media (hover: hover) {
     &:hover {
-      background-color: white;
+      background-color: var(--grey);
       color: black;
     }
   }

@@ -1,15 +1,18 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { ProductsContext } from '../../context/productsContext'
+import { CartContext } from '../../context/cartContext'
+
 import Spinner from '../../components/spinner/spinner'
 import { ProductContainer } from './styled'
 
-import SHOP_DATA from '../../../shop-data.js'
-
 const Product = () => {
-  const isLoading = false
+  const { products } = useContext(ProductsContext)
+  const { addToCart, setIsCartOpen } = useContext(CartContext)
+
   const [selectedSize, setSelectedSize] = useState(null)
   const [sizeError, setSizeError] = useState(false)
 
-  const products = SHOP_DATA
+  const isLoading = false
   const productId = window.location.pathname.split('/')[2]
   const product = products.find(product => product.code_color === productId)
 
@@ -18,13 +21,14 @@ const Product = () => {
       setSelectedSize(null)
       return
     }
-
+    product.selectedSize = sku
     setSelectedSize(sku)
     setSizeError(false)
   }
 
-  const addToCart = () => {
-    console.log('addtocart')
+  const handleAddToCart = () => {
+    setIsCartOpen(true)
+    addToCart(product)
   }
 
   return (
@@ -46,6 +50,7 @@ const Product = () => {
               />
             ))}
           </figure>
+
           <div className="product__content">
             <h3 className="product__name">{product?.name}</h3>
             <div className="product__pricing">
@@ -55,10 +60,11 @@ const Product = () => {
                 </span>
               )}
               <span className="product__price">{product?.actual_price}</span>
-              <span className="product__price product__price--installments">
+              {/* <span className="product__price product__price--installments">
                 or {product?.installments}
-              </span>
+              </span> */}
             </div>
+
             <div className="product__sizes">
               <p className="product__description">Choose a size:</p>
 
@@ -90,11 +96,12 @@ const Product = () => {
                 )}
               </div>
             </div>
+
             <div className="product__actions">
               <button
                 type="button"
                 className="product__add-to-cart"
-                onClick={addToCart}
+                onClick={handleAddToCart}
               >
                 Add To Cart
               </button>
