@@ -44,7 +44,7 @@ export const SearchContent = styled.div`
       text-align: center;
       align-self: center;
       font-size: 1.6rem;
-      color: var(--light-grey);
+      color: var(--grey);
       position: absolute;
       top: 50%;
       left: 0;
