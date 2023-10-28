@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useReducer, useState } from 'react'
 import { priceToNumber } from '../utils/currency'
 
 export const CartContext = createContext({
@@ -12,6 +12,44 @@ export const CartContext = createContext({
   setCartCount: () => {},
   cartTotal: 0,
 })
+
+const INITIAL_STATE = {
+  cartProducts: [],
+  isCartOpen: false,
+  cartCount: 0,
+  cartTotal: 0,
+}
+
+const cartReducer = (state, action) => {
+  const { type, payload } = action
+
+  switch (type) {
+    case 'SET_CART_PRODUCTS':
+      return {
+        ...state,
+        cartProducts: payload,
+      }
+    case 'SET_IS_CART_OPEN':
+      return {
+        ...state,
+        isCartOpen: payload,
+      }
+    case 'SET_CART_COUNT':
+      return {
+        ...state,
+        cartCount: payload,
+      }
+    case 'SET_CART_TOTAL':
+      return {
+        ...state,
+        cartTotal: payload,
+      }
+    default:
+      throw new Error(`
+        Unhandled type ${type} in cartReducer!
+      `)
+  }
+}
 
 const addCartItem = (cartItems, productToAdd) => {
   const existingCartItem = cartItems.find(
@@ -54,10 +92,24 @@ const clearCartItem = (cartItems, productToRemove) => {
 }
 
 export const CartProvider = ({ children }) => {
-  const [cartCount, setCartCount] = useState(0)
-  const [cartTotal, setCartTotal] = useState(0)
-  const [isCartOpen, setIsCartOpen] = useState(false)
-  const [cartProducts, setCartProducts] = useState([])
+  const [{ cartCount, cartProducts, cartTotal, isCartOpen }, dispatch] =
+    useReducer(cartReducer, INITIAL_STATE)
+
+  const setCartCount = value => {
+    dispatch({ type: 'SET_CART_COUNT', payload: value })
+  }
+
+  const setCartTotal = value => {
+    dispatch({ type: 'SET_CART_TOTAL', payload: value })
+  }
+
+  const setIsCartOpen = bool => {
+    dispatch({ type: 'SET_IS_CART_OPEN', payload: bool })
+  }
+
+  const setCartProducts = prods => {
+    dispatch({ type: 'SET_CART_PRODUCTS', payload: prods })
+  }
 
   useEffect(() => {
     const newCartCount = cartProducts.reduce((total, cartItem) => {

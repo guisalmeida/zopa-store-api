@@ -6,7 +6,6 @@ import { ProductsCategories } from './styled'
 const CategoriesBar = () => {
   const { category } = useParams()
   const { products } = useContext(ProductsContext)
-  console.log(category)
   const categoriesSet = new Set()
 
   products.forEach(product => {

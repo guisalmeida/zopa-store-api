@@ -14,12 +14,11 @@ import * as Styled from './styled'
 const Search = () => {
   const [query, setQuery] = useState('')
   const { products } = useContext(ProductsContext)
-  const { search, setSearch, isSearchOpen, setIsSearchOpen } =
+  const { searchProducts, setSearchProducts, isSearchOpen, setIsSearchOpen } =
     useContext(SearchContext)
 
   const handleShowSearch = bool => {
-    console.log('search')
-    setSearch([])
+    setSearchProducts([])
     setQuery('')
     setIsSearchOpen(bool)
   }
@@ -28,14 +27,14 @@ const Search = () => {
     const searchQuery = event.target.value.trim().toLowerCase()
 
     if (searchQuery === '') {
-      return setSearch([])
+      return setSearchProducts([])
     }
 
     const result = products.filter(({ name }) =>
       name.toLowerCase().includes(query),
     )
     setQuery(searchQuery)
-    setSearch(result)
+    setSearchProducts(result)
   }
 
   return (
@@ -52,13 +51,15 @@ const Search = () => {
       </Styled.SearchContainer>
 
       <Styled.SearchContent>
-        {search.length > 0 && <Quantity length={search.length} />}
+        {searchProducts.length > 0 && (
+          <Quantity length={searchProducts.length} />
+        )}
 
         <div className="search__list">
-          {search && search.length === 0 ? (
+          {searchProducts && searchProducts.length === 0 ? (
             <p className="search__empty">Product not found :\</p>
           ) : (
-            search.map((prod, index) => (
+            searchProducts.map((prod, index) => (
               <Link
                 className="search__link"
                 to={`product/${prod.code_color}`}
