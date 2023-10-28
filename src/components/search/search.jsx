@@ -19,7 +19,7 @@ const Search = () => {
   const handleShowSearch = bool => setIsSearchOpen(bool)
 
   const handleSearch = event => {
-    let query = event.target.value.trim()
+    let query = event.target.value.trim().toLowerCase()
     if (query === '') {
       return setSearch([])
     }

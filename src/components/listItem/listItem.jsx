@@ -53,13 +53,11 @@ const ListItem = ({ item, mode }) => {
         )}
         {item?.on_sale && (
           <p className="list__price list__price--old">
-            {priceToStringBr(
-              priceToNumber(item?.regular_price) * item?.quantity,
-            )}
+            {priceToStringBr(priceToNumber(item.regular_price) * item.quantity)}
           </p>
         )}
         <p className="list__price">
-          {priceToStringBr(priceToNumber(item?.actual_price) * item?.quantity)}
+          {priceToStringBr(priceToNumber(item.actual_price) * item.quantity)}
         </p>
         {/* <p className="list__price list__price--installments">
           {item?.installments}
