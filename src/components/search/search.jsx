@@ -41,6 +41,7 @@ const Search = () => {
     <Slider show={isSearchOpen} title="Search" handleShow={handleShowSearch}>
       <Styled.SearchContainer>
         <DebounceInput
+          name="Search field"
           type="text"
           className="search__input"
           placeholder="Buscar..."
