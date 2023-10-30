@@ -23,11 +23,16 @@ export const SignContainer = styled.div`
   h2 {
     margin: 10px 0;
   }
+
+  form {
+    margin-top: 2rem;
+  }
 `
 
 export const ButtonsContaner = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 2rem 0 0;
 
   button[type='submit'] {
     margin-bottom: 1rem;

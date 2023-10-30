@@ -71,10 +71,11 @@ const SignUp = () => {
 
       <form onSubmit={handleSubmit}>
         <FormInput
-          label="Display Name"
+          label="Name"
           type="text"
           name="displayName"
           value={displayName}
+          placeholder="Enter your name..."
           onChange={handleChange}
           required
         />
@@ -84,6 +85,7 @@ const SignUp = () => {
           type="email"
           name="email"
           value={email}
+          placeholder="Enter your email address..."
           onChange={handleChange}
           required
         />
@@ -93,6 +95,7 @@ const SignUp = () => {
           type="password"
           name="password"
           value={password}
+          placeholder="Enter your password..."
           onChange={handleChange}
           required
         />
@@ -101,6 +104,7 @@ const SignUp = () => {
           label="Confirm Password"
           type="password"
           name="confirmPassword"
+          placeholder="Re-enter your password..."
           value={confirmPassword}
           onChange={handleChange}
           required

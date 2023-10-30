@@ -72,6 +72,7 @@ const SignInForm = () => {
           type="email"
           name="email"
           value={email}
+          placeholder="Enter your email address..."
           onChange={handleChange}
           required
         />
@@ -80,6 +81,7 @@ const SignInForm = () => {
           type="password"
           name="password"
           value={password}
+          placeholder="Enter your password..."
           onChange={handleChange}
           required
         />
