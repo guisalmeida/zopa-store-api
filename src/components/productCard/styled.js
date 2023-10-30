@@ -6,6 +6,7 @@ export const ProductCardContainer = styled.div`
   box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.1);
   text-align: center;
   overflow: hidden;
+  max-width: var(--break-small);
 
   a {
     text-decoration: none;

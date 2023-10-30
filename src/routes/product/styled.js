@@ -125,29 +125,29 @@ export const ProductContainer = styled.div`
     `}
 
   ${media.lessThan('medium')`
-        max-width: var(--break-small);
-        flex-direction: column;
-        margin: 3rem auto;
+      max-width: var(--break-small);
+      flex-direction: column;
+      margin: 3rem auto;
 
-        .product__content {
-            width: 100%;
-            padding: 1rem;
-            
-            
-            .product__name {
-                margin-top: 0;
-            }
-    
-            .product__actions {
-    
-                .product__add-to-cart {
-                    width: 100%;
-                }
-            }
-        }
+      .product__content {
+          width: 100%;
+          padding: 1rem;
+          
+          
+          .product__name {
+              margin-top: 0;
+          }
+  
+          .product__actions {
+  
+              .product__add-to-cart {
+                  width: 100%;
+              }
+          }
+      }
 
-        .product__image img:not(:first-child) {
-            display: none;
-        }
-    `}
+      .product__image img:not(:first-child) {
+          display: none;
+      }
+  `}
 `
