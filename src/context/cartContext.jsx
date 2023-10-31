@@ -84,9 +84,8 @@ export const CartProvider = ({ children }) => {
   const [{ cartCount, cartProducts, cartTotal, isCartOpen }, dispatch] =
     useReducer(cartReducer, INITIAL_STATE)
 
-  const setIsCartOpen = bool => {
+  const setIsCartOpen = bool =>
     dispatch({ type: 'SET_IS_CART_OPEN', payload: bool })
-  }
 
   const setCartProducts = newCartItems => {
     const newCartTotal = newCartItems.reduce((total, cartItem) => {

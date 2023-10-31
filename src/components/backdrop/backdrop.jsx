@@ -1,14 +1,8 @@
-import { useState } from 'react'
 import { BackdropContainer } from './styled'
 
-const Backdrop = () => {
-  const [isShowCart, setIsShowCart] = useState(false)
-
+const Backdrop = ({ show, handleShow }) => {
   return (
-    <BackdropContainer
-      $isShowCart={isShowCart}
-      onClick={() => setIsShowCart(!isShowCart)}
-    />
+    <BackdropContainer $isShowCart={show} onClick={() => handleShow(false)} />
   )
 }
 

@@ -16,7 +16,7 @@ export const BackdropContainer = styled.div`
   ${props =>
     props.$isShowCart &&
     `
-    opacity: 1;
-    visibility: visible;
+      opacity: 1;
+      visibility: visible;
   `}
 `

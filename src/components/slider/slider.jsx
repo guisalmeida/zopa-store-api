@@ -15,7 +15,7 @@ const Slider = ({ show, title, children, handleShow }) => {
         </header>
         <div className="slider__content">{children}</div>
       </SliderContainer>
-      <Backdrop />
+      <Backdrop show={show} handleShow={handleShow} />
     </>
   )
 }
