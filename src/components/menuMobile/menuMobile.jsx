@@ -1,13 +1,12 @@
 import { useContext } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { UserContext } from '../../context/userContext'
-
-import Slider from '../slider'
+import { signOutUser } from '../../utils/firebase'
 
 import { MenuContainer } from './styled'
 
 const MenuMobile = () => {
-  const { setIsMobileOpen, isMobileOpen } = useContext(UserContext)
+  const { currentUser, setIsMobileOpen, isMobileOpen } = useContext(UserContext)
 
   const toggleMobileMenu = () => {
     setIsMobileOpen(false)
@@ -18,13 +17,19 @@ const MenuMobile = () => {
       <ul>
         <li>
           <Link to="/shop" onClick={toggleMobileMenu}>
-            shop
+            Loja
           </Link>
         </li>
         <li>
-          <Link to="/auth/sign-in" onClick={toggleMobileMenu}>
-            My account
-          </Link>
+          {currentUser ? (
+            <button type="button" onClick={signOutUser}>
+              Sair
+            </button>
+          ) : (
+            <Link to="/auth/sign-in" title="Entrar na sua conta">
+              Entrar
+            </Link>
+          )}
         </li>
       </ul>
     </MenuContainer>

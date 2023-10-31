@@ -45,10 +45,12 @@ export const MenuContainer = styled.nav`
       color: var(--main-color);
     }
 
-    a {
+    a,
+    button {
       text-decoration: none;
       color: var(--main-color);
       text-transform: capitalize;
+      font-size: 1rem;
 
       &.selected {
         text-decoration: underline;
