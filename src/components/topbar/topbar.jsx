@@ -6,10 +6,9 @@ import { CartContext } from '../../context/cartContext'
 import { SearchContext } from '../../context/searchContext'
 import { ReactComponent as SearchIcon } from '../../assets/search-icon.svg'
 import { ReactComponent as ZopaLogo } from '../../assets/logo-zopa.svg'
-import { Menu } from '@styled-icons/zondicons/Menu'
 import { signOutUser } from '../../utils/firebase'
 
-import { TopbarContainer } from './styled'
+import { TopbarContainer, MenuMobileIcon } from './styled'
 
 const Topbar = () => {
   const { currentUser, setIsMobileOpen, isMobileOpen } = useContext(UserContext)
@@ -34,7 +33,7 @@ const Topbar = () => {
             title="Menu"
             onClick={handleMobileMenu}
           >
-            <Menu />
+            <MenuMobileIcon />
           </button>
         </div>
 

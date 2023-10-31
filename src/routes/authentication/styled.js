@@ -27,6 +27,10 @@ export const SignContainer = styled.div`
   form {
     margin-top: 2rem;
   }
+
+  a {
+    color: var(--dark);
+  }
 `
 
 export const ButtonsContaner = styled.div`

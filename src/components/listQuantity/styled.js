@@ -17,6 +17,7 @@ export const ListQuantityContainer = styled.div`
     font-weight: 600;
     padding: 0.2rem;
     border: 0.1rem solid #212529;
+    color: var(--dark);
 
     @media (hover: hover) {
       &:hover {

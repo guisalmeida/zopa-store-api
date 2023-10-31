@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import media from 'styled-media-query'
+import { Menu } from '@styled-icons/zondicons/Menu'
 
 export const TopbarContainer = styled.header`
   width: 100%;
@@ -110,4 +111,8 @@ export const TopbarContainer = styled.header`
       }
     }
   }
+`
+
+export const MenuMobileIcon = styled(Menu)`
+  color: var(--dark);
 `

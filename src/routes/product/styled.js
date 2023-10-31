@@ -75,6 +75,7 @@ export const ProductContainer = styled.div`
           line-height: 1;
           text-align: center;
           transition: all ease 0.3s;
+          color: var(--dark);
 
           @media (hover: hover) {
             &:hover {
