@@ -34,8 +34,13 @@ const Product = () => {
   }
 
   const handleAddToCart = () => {
+    if (!selectedSize) {
+      return setSizeError(true)
+    }
+
     setIsCartOpen(true)
     addToCart(product)
+    setSelectedSize(null)
   }
 
   return (
@@ -73,11 +78,11 @@ const Product = () => {
             </div>
 
             <div className="product__sizes">
-              <p className="product__description">Choose a size:</p>
+              <p className="product__description">Tamanhos disponíveis:</p>
 
               {sizeError && (
                 <p className="product__description product__description--warning">
-                  You need to choose a size
+                  É necessário escolher um tamanho!
                 </p>
               )}
 
@@ -110,7 +115,7 @@ const Product = () => {
                 className="product__add-to-cart"
                 onClick={handleAddToCart}
               >
-                Add To Cart
+                Adicionar ao carrinho
               </button>
             </div>
           </div>

@@ -23,21 +23,21 @@ const Topbar = () => {
     <TopbarContainer>
       <div className="container">
         <div className="topbar__links">
-          <Link to="/shop" className="topbar__link" title="Shop">
-            Shop
+          <Link to="/shop" className="topbar__link" title="Ir para loja">
+            Loja
           </Link>
 
           <button
             type="button"
             className="topbar__menu-mobile"
-            title="Menu"
+            title="Abrir menu"
             onClick={handleMobileMenu}
           >
             <MenuMobileIcon />
           </button>
         </div>
 
-        <Link to="/" title="Home">
+        <Link to="/" title="Página inicial">
           <ZopaLogo className="logo" />
         </Link>
 
@@ -48,22 +48,22 @@ const Topbar = () => {
               className="topbar__link"
               onClick={signOutUser}
             >
-              Signout
+              Sair
             </button>
           ) : (
             <Link
               to="/auth/sign-in"
               className="topbar__link"
-              title="My Account"
+              title="Entrar na sua conta"
             >
-              My account
+              Entrar
             </Link>
           )}
 
           <button
             type="button"
             className="topbar__cart"
-            title="My Cart"
+            title="Carrinho de compras"
             onClick={toggleIsCartOpen}
           >
             <CartIcon />
@@ -71,7 +71,7 @@ const Topbar = () => {
           <button
             type="button"
             className="topbar__search"
-            title="Search"
+            title="Busca por produtos"
             onClick={toggleIsSearchOpen}
           >
             <SearchIcon />

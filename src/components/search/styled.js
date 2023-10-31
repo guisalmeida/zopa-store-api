@@ -14,10 +14,9 @@ export const SearchContainer = styled.div`
     box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2);
     color: var(--dark);
     background: white;
-    border-radius: 4px;
+    border-radius: 0.5rem;
     font-size: 1rem;
-    font-weight: 600;
-    border: 1px;
+    border: 1rem;
   }
 `
 

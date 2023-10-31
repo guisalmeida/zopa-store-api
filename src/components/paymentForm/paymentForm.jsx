@@ -7,7 +7,7 @@ export const PaymentForm = () => {
         <h2>Credit Card Payment: </h2>
 
         <PaymentButton isLoading={false} buttonType="base">
-          Pay Now
+          Pagar
         </PaymentButton>
       </FormContainer>
     </PaymentFormContainer>

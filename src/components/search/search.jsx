@@ -3,6 +3,7 @@ import { DebounceInput } from 'react-debounce-input'
 import { Link } from 'react-router-dom'
 import { ProductsContext } from '../../context/productsContext'
 import { SearchContext } from '../../context/searchContext'
+import { CartEmpty } from '../miniCart/styled'
 
 import ListItem from '../listItem'
 
@@ -38,13 +39,17 @@ const Search = () => {
   }
 
   return (
-    <Slider show={isSearchOpen} title="Search" handleShow={handleShowSearch}>
+    <Slider
+      show={isSearchOpen}
+      title="Busca por produtos"
+      handleShow={handleShowSearch}
+    >
       <Styled.SearchContainer>
         <DebounceInput
           name="Search field"
           type="text"
           className="search__input"
-          placeholder="Buscar..."
+          placeholder="Digite nome do produto..."
           debounceTimeout={400}
           onChange={event => handleSearch(event)}
           value={query}
@@ -58,7 +63,7 @@ const Search = () => {
 
         <div className="search__list">
           {searchProducts && searchProducts.length === 0 ? (
-            <p className="search__empty">Product not found :\</p>
+            <CartEmpty>Nenhum produto encontrado :(</CartEmpty>
           ) : (
             searchProducts.map((prod, index) => (
               <Link

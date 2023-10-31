@@ -60,11 +60,10 @@ const SignInForm = () => {
 
   return (
     <SignContainer>
+      <h2>Entrar com email e senha</h2>
       <h2>
-        Don&apos;t have an account? <Link to="/auth/sign-up">Sign Up</Link>
+        Não tem uma conta? <Link to="/auth/sign-up">Criar conta</Link>
       </h2>
-
-      <h3>Sign in with your email and password</h3>
 
       <form onSubmit={handleSubmit}>
         <FormInput
@@ -72,25 +71,25 @@ const SignInForm = () => {
           type="email"
           name="email"
           value={email}
-          placeholder="Enter your email address..."
+          placeholder="Digite email..."
           onChange={handleChange}
           required
         />
         <FormInput
-          label="Password"
+          label="Senha"
           type="password"
           name="password"
           value={password}
-          placeholder="Enter your password..."
+          placeholder="Digite sua senha..."
           onChange={handleChange}
           required
         />
         <ButtonsContaner>
           <Button buttonType="base" type="submit">
-            Sign In
+            Entrar
           </Button>
           <Button buttonType="google" type="button" onClick={signInWithGoogle}>
-            Sign In With Google
+            Entrar com Google
           </Button>
         </ButtonsContaner>
       </form>

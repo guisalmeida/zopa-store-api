@@ -25,14 +25,14 @@ const MiniCart = () => {
     <Slider
       show={isCartOpen}
       handleShow={handleShowCart}
-      title={`Cart - ${cartCount} Item(s)`}
+      title={`Carrinho - ${cartCount} Ite${cartCount === 1 ? 'm' : 'ns'}`}
     >
       {cartProducts?.length > 0 ? (
         cartProducts.map((cartItem, index) => {
           return <ListItem key={index} item={cartItem} mode="cart" />
         })
       ) : (
-        <CartEmpty>Your cart is empty :(</CartEmpty>
+        <CartEmpty>Carrinho vazio :(</CartEmpty>
       )}
 
       {cartProducts?.length > 0 && pathname !== '/checkout' && (
@@ -41,7 +41,7 @@ const MiniCart = () => {
           className="checkout__button"
           onClick={handleCheckout}
         >
-          Checkout
+          Finalizar pedido
         </Button>
       )}
     </Slider>
