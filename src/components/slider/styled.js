@@ -17,7 +17,7 @@ export const SliderContainer = styled.div`
   ${props =>
     props.$show &&
     `
-        transform: translateX(0);
+      transform: translateX(0);
     `}
 
   .slider__header {

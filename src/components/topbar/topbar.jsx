@@ -6,19 +6,19 @@ import { CartContext } from '../../context/cartContext'
 import { SearchContext } from '../../context/searchContext'
 import { ReactComponent as SearchIcon } from '../../assets/search-icon.svg'
 import { ReactComponent as ZopaLogo } from '../../assets/logo-zopa.svg'
-import { Menu } from '@styled-icons/ionicons-solid/Menu'
+import { Menu } from '@styled-icons/zondicons/Menu'
 import { signOutUser } from '../../utils/firebase'
 
 import { TopbarContainer } from './styled'
 
 const Topbar = () => {
-  const { currentUser } = useContext(UserContext)
+  const { currentUser, setIsMobileOpen, isMobileOpen } = useContext(UserContext)
   const { isCartOpen, setIsCartOpen } = useContext(CartContext)
   const { isSearchOpen, setIsSearchOpen } = useContext(SearchContext)
 
   const toggleIsCartOpen = () => setIsCartOpen(!isCartOpen)
   const toggleIsSearchOpen = () => setIsSearchOpen(!isSearchOpen)
-  const handleMobileMenu = () => console.log('mobile menu')
+  const handleMobileMenu = () => setIsMobileOpen(!isMobileOpen)
 
   return (
     <TopbarContainer>

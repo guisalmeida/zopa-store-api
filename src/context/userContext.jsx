@@ -8,10 +8,13 @@ import PropTypes from 'prop-types'
 export const UserContext = createContext({
   currentUser: null,
   setCurrentUser: () => null,
+  isMobileOpen: false,
+  setIsMobileOpen: () => {},
 })
 
 const INITIAL_STATE = {
   currentUser: null,
+  isMobileOpen: false,
 }
 
 const userReducer = (state, action) => {
@@ -23,6 +26,11 @@ const userReducer = (state, action) => {
         ...state,
         currentUser: payload,
       }
+    case 'SET_IS_MOBILE_OPEN':
+      return {
+        ...state,
+        isMobileOpen: payload,
+      }
     default:
       throw new Error(`
         Unhandled type ${type} in userReducer!
@@ -31,13 +39,20 @@ const userReducer = (state, action) => {
 }
 
 export const UserProvider = ({ children }) => {
-  const [{ currentUser }, dispatch] = useReducer(userReducer, INITIAL_STATE)
+  const [{ currentUser, isMobileOpen }, dispatch] = useReducer(
+    userReducer,
+    INITIAL_STATE,
+  )
 
   const setCurrentUser = user => {
     dispatch({ type: 'SET_CURRENT_USER', payload: user })
   }
 
-  const value = { currentUser, setCurrentUser }
+  const setIsMobileOpen = bool => {
+    dispatch({ type: 'SET_IS_MOBILE_OPEN', payload: bool })
+  }
+
+  const value = { currentUser, setCurrentUser, isMobileOpen, setIsMobileOpen }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangeListener(user => {

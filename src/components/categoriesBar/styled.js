@@ -3,7 +3,8 @@ import media from 'styled-media-query'
 
 export const ProductsCategories = styled.nav`
   width: 100%;
-  height: 3rem;
+  height: auto;
+  min-height: 3rem;
   background: white;
   margin: 3rem 0 0;
   border-bottom: 1px solid var(--border);
@@ -13,6 +14,7 @@ export const ProductsCategories = styled.nav`
 
   ul {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     max-width: var(--break-large);
 
@@ -21,8 +23,9 @@ export const ProductsCategories = styled.nav`
     `}
 
     ${media.lessThan('medium')`
-            padding: 0 1rem;
-        `}
+        justify-content: center;
+        padding: 0 1rem;
+    `}
 
     a {
       text-decoration: none;
@@ -41,7 +44,11 @@ export const ProductsCategories = styled.nav`
     }
 
     li {
-      margin-right: 1rem;
+      margin: 0 1rem 0 0;
+
+      ${media.lessThan('medium')`
+        margin: 0.5rem;
+    `}
     }
 
     li:not(:last-child)::after {
