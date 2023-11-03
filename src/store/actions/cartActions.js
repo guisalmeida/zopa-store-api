@@ -1,10 +1,7 @@
-export const addToCart = (cartItems, productToAdd) => {
-  console.log(cartItems)
-  const existingCartItem =
-    cartItems &&
-    cartItems.find(
-      cartItem => cartItem.selectedSize === productToAdd.selectedSize,
-    )
+export const addToCart = (cartItems = [], productToAdd = {}) => {
+  const existingCartItem = cartItems.find(
+    cartItem => cartItem.selectedSize === productToAdd.selectedSize,
+  )
 
   if (existingCartItem) {
     const newCartItems = cartItems.map(cartItem =>
@@ -19,12 +16,10 @@ export const addToCart = (cartItems, productToAdd) => {
   return setCartProducts(newCartItems)
 }
 
-export const removeFromCart = (cartItems, productToRemove) => {
-  const existingCartItem =
-    cartItems &&
-    cartItems.find(
-      cartItem => cartItem.selectedSize === productToRemove.selectedSize,
-    )
+export const removeFromCart = (cartItems = [], productToRemove = {}) => {
+  const existingCartItem = cartItems.find(
+    cartItem => cartItem.selectedSize === productToRemove.selectedSize,
+  )
 
   if (existingCartItem.quantity === 1) {
     const newCartItems = cartItems.filter(cartItem => {
@@ -41,7 +36,7 @@ export const removeFromCart = (cartItems, productToRemove) => {
   return setCartProducts(newCartItems)
 }
 
-export const clearFromCart = (cartItems, productToRemove) => {
+export const clearFromCart = (cartItems = [], productToRemove = {}) => {
   const newCartItems = cartItems.filter(cartItem => {
     return cartItem.selectedSize !== productToRemove.selectedSize
   })
@@ -53,7 +48,7 @@ export const setIsCartOpen = bool => ({
   payload: bool,
 })
 
-export const setCartProducts = newCartItems => {
+export const setCartProducts = (newCartItems = []) => {
   return {
     type: 'SET_CART_PRODUCTS',
     payload: newCartItems,
