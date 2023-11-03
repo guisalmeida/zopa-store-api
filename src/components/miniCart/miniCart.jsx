@@ -1,6 +1,12 @@
-import { useContext } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { CartContext } from '../../context/cartContext'
+
+import { setIsCartOpen } from '../../store/actions/cartActions'
+import {
+  selectCartCount,
+  selectIsCartOpen,
+  selectCartProducts,
+} from '../../store/selectors/cartSelectors'
 
 import Slider from '../slider'
 import Button from '../button'
@@ -9,17 +15,20 @@ import ListItem from '../listItem'
 import { CartEmpty } from './styled'
 
 const MiniCart = () => {
-  const { cartProducts, cartCount, isCartOpen, setIsCartOpen } =
-    useContext(CartContext)
+  const dispatch = useDispatch()
+
+  const cartProducts = useSelector(selectCartProducts)
+  const cartCount = useSelector(selectCartCount)
+  const isCartOpen = useSelector(selectIsCartOpen)
 
   const pathname = window.location.pathname || undefined
   const navigate = useNavigate()
 
   const handleCheckout = () => {
-    setIsCartOpen(false)
+    dispatch(setIsCartOpen(false))
     navigate('checkout')
   }
-  const handleShowCart = bool => setIsCartOpen(bool)
+  const handleShowCart = bool => dispatch(setIsCartOpen(bool))
 
   return (
     <Slider

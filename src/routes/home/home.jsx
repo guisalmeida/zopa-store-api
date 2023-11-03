@@ -1,13 +1,15 @@
-import { useContext } from 'react'
-import { ProductsContext } from '../../context/productsContext'
-
+import { useSelector } from 'react-redux'
+import {
+  selectAllProducts,
+  selectIsLoading,
+} from '../../store/selectors/productsSelectors'
 import { Carousel } from '../../components/carousel/carousel'
 import ProductsList from '../../components/productsList'
 import Spinner from '../../components/spinner/spinner'
 
 const Home = () => {
-  const { products } = useContext(ProductsContext)
-  const isLoading = false
+  const products = useSelector(selectAllProducts)
+  const isLoading = useSelector(selectIsLoading)
 
   return (
     <>

@@ -1,41 +1,51 @@
-import { useContext, useState } from 'react'
-import { DebounceInput } from 'react-debounce-input'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { ProductsContext } from '../../context/productsContext'
-import { SearchContext } from '../../context/searchContext'
-import { CartEmpty } from '../miniCart/styled'
+import { DebounceInput } from 'react-debounce-input'
+
+import {
+  setIsSearchOpen,
+  setSearchProducts,
+} from '../../store/actions/searchActions'
+import { selectAllProducts } from '../../store/selectors/productsSelectors'
+import {
+  selectIsSearchOpen,
+  selectSearchProducts,
+} from '../../store/selectors/searchSelectors'
 
 import ListItem from '../listItem'
-
 import Slider from '../slider'
 import Quantity from '../quantity'
+
+import { CartEmpty } from '../miniCart/styled'
 
 import * as Styled from './styled'
 
 const Search = () => {
+  const dispatch = useDispatch()
   const [query, setQuery] = useState('')
-  const { products } = useContext(ProductsContext)
-  const { searchProducts, setSearchProducts, isSearchOpen, setIsSearchOpen } =
-    useContext(SearchContext)
+  const allProducts = useSelector(selectAllProducts)
+  const searchProducts = useSelector(selectSearchProducts)
+  const isSearchOpen = useSelector(selectIsSearchOpen)
 
   const handleShowSearch = bool => {
-    setSearchProducts([])
     setQuery('')
-    setIsSearchOpen(bool)
+    dispatch(setSearchProducts([]))
+    dispatch(setIsSearchOpen(bool))
   }
 
   const handleSearch = event => {
     const searchQuery = event.target.value.trim().toLowerCase()
 
     if (searchQuery === '') {
-      return setSearchProducts([])
+      return dispatch(setSearchProducts([]))
     }
 
-    const result = products.filter(({ name }) =>
+    const result = allProducts.filter(({ name }) =>
       name.toLowerCase().includes(query),
     )
     setQuery(searchQuery)
-    setSearchProducts(result)
+    dispatch(setSearchProducts(result))
   }
 
   return (

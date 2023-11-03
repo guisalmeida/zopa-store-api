@@ -26,8 +26,8 @@ export const TopbarContainer = styled.header`
     margin: 0 auto;
 
     ${media.lessThan('large')`
-            max-width: var(--break-medium);
-        `}
+      max-width: var(--break-medium);
+    `}
   }
 
   .logo {
@@ -60,9 +60,9 @@ export const TopbarContainer = styled.header`
       cursor: pointer;
       font-size: 1rem;
 
-      ${media.lessThan('medium')`
-                display: none;
-            `}
+      ${media.lessThan('small')`
+        display: none;
+      `}
 
       @media (hover: hover) {
         &:hover {
@@ -84,9 +84,9 @@ export const TopbarContainer = styled.header`
       height: 20px;
       padding: 0;
 
-      ${media.greaterThan('medium')`
-                display: none;
-            `}
+      ${media.greaterThan('small')`
+        display: none;
+      `}
     }
 
     .topbar__search {
@@ -100,9 +100,9 @@ export const TopbarContainer = styled.header`
       cursor: pointer;
       margin-right: 1.5rem;
 
-      ${media.lessThan('medium')`
-                display: none;
-            `}
+      ${media.lessThan('small')`
+        display: none;
+      `}
 
       @media (hover: hover) {
         &:hover {

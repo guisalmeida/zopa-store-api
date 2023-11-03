@@ -1,14 +1,15 @@
-import { useContext } from 'react'
+import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import { ProductsContext } from '../../context/productsContext'
+import { selectAllProducts } from '../../store/selectors/productsSelectors'
+
 import { ProductsCategories } from './styled'
 
 const CategoriesBar = () => {
   const { category } = useParams()
-  const { products } = useContext(ProductsContext)
+  const allProducts = useSelector(selectAllProducts)
   const categoriesSet = new Set()
 
-  products.forEach(product => {
+  allProducts.forEach(product => {
     product.categories.forEach(cat => categoriesSet.add(cat))
   })
 

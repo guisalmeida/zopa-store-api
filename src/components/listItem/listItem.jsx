@@ -1,8 +1,11 @@
-import { useContext } from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
+import { clearFromCart } from '../../store/actions/cartActions'
+
 import { priceToNumber, priceToStringBr } from '../../utils/currency'
+import { selectCartProducts } from '../../store/selectors/cartSelectors'
+
 import ListQuantity from '../listQuantity'
-import { CartContext } from '../../context/cartContext'
 
 import {
   ListItemContainer,
@@ -13,9 +16,9 @@ import {
 } from './styled'
 
 const ListItem = ({ item, mode }) => {
-  const { clearFromCart } = useContext(CartContext)
-
-  const handleDelete = () => clearFromCart(item)
+  const dispatch = useDispatch()
+  const cartProducts = useSelector(selectCartProducts)
+  const handleDelete = () => dispatch(clearFromCart(cartProducts, item))
 
   const { size } = item.selectedSize
     ? item.sizes.find(size => size.sku === item.selectedSize)
@@ -69,11 +72,13 @@ const ListItem = ({ item, mode }) => {
 
 ListItem.propTypes = {
   item: PropTypes.shape({
-    // sizes: PropTypes.arrayOf({
-    //   available: PropTypes.bool.isRequired,
-    //   size: PropTypes.string.isRequired,
-    //   sku: PropTypes.string.isRequired,
-    // }),
+    sizes: PropTypes.arrayOf(
+      PropTypes.shape({
+        available: PropTypes.bool.isRequired,
+        size: PropTypes.string.isRequired,
+        sku: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     selectedSize: PropTypes.string,
@@ -81,7 +86,7 @@ ListItem.propTypes = {
     on_sale: PropTypes.bool.isRequired,
     regular_price: PropTypes.string.isRequired,
     actual_price: PropTypes.string.isRequired,
-    // installments: PropTypes.string.isRequired,
+    installments: PropTypes.string,
   }),
 }
 

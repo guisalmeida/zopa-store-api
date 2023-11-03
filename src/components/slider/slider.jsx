@@ -23,7 +23,7 @@ const Slider = ({ show, title, children, handleShow }) => {
 Slider.propTypes = {
   show: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
   handleShow: PropTypes.func.isRequired,
 }
 

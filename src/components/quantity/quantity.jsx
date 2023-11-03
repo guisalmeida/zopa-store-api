@@ -1,4 +1,5 @@
 import { QuantityContainer } from './styled'
+import PropTypes from 'prop-types'
 
 const Quantity = ({ length }) => {
   return (
@@ -6,6 +7,10 @@ const Quantity = ({ length }) => {
       length > 1 ? 's' : ''
     }`}</QuantityContainer>
   )
+}
+
+Quantity.propTypes = {
+  length: PropTypes.number.isRequired,
 }
 
 export default Quantity
