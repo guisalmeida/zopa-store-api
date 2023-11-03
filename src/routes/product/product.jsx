@@ -17,13 +17,13 @@ const Product = () => {
   const dispatch = useDispatch()
   const { category } = useParams()
 
-  const [prods, setProds] = useState(allProducts)
-  const [selectedSize, setSelectedSize] = useState(null)
-  const [sizeError, setSizeError] = useState(false)
-
   const isLoading = useSelector(selectIsLoading)
   const allProducts = useSelector(selectAllProducts)
   const cartProducts = useSelector(selectCartProducts)
+
+  const [prods, setProds] = useState(allProducts)
+  const [selectedSize, setSelectedSize] = useState(null)
+  const [sizeError, setSizeError] = useState(false)
 
   const productId = window.location.pathname.split('/')[2]
   const product = prods.find(product => product.code_color === productId)
