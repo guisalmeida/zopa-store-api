@@ -1,4 +1,5 @@
 export const addToCart = (cartItems, productToAdd) => {
+  console.log(cartItems)
   const existingCartItem =
     cartItems &&
     cartItems.find(
