@@ -19,7 +19,7 @@ const composeEnhancer =
     window &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
   compose
-console.log(composeEnhancer)
+
 const composedEnhancers = composeEnhancer(applyMiddleware(...middleWares))
 
 export const store = legacy_createStore(
