@@ -1,7 +1,9 @@
 export const addToCart = (cartItems, productToAdd) => {
-  const existingCartItem = cartItems.find(
-    cartItem => cartItem.selectedSize === productToAdd.selectedSize,
-  )
+  const existingCartItem =
+    cartItems &&
+    cartItems.find(
+      cartItem => cartItem.selectedSize === productToAdd.selectedSize,
+    )
 
   if (existingCartItem) {
     const newCartItems = cartItems.map(cartItem =>
@@ -17,9 +19,11 @@ export const addToCart = (cartItems, productToAdd) => {
 }
 
 export const removeFromCart = (cartItems, productToRemove) => {
-  const existingCartItem = cartItems.find(
-    cartItem => cartItem.selectedSize === productToRemove.selectedSize,
-  )
+  const existingCartItem =
+    cartItems &&
+    cartItems.find(
+      cartItem => cartItem.selectedSize === productToRemove.selectedSize,
+    )
 
   if (existingCartItem.quantity === 1) {
     const newCartItems = cartItems.filter(cartItem => {
