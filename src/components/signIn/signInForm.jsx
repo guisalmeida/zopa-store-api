@@ -1,9 +1,12 @@
-import { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 import {
-  signInWithGooglePopup,
-  signInAuthUserWithEmailAndPassword,
-} from '../../utils/firebase'
+  googleSignInstart,
+  emailSingInStart,
+} from '../../store/actions/userActions'
+
+import { selectCurrentUser } from '../../store/selectors/userSelectors'
 
 import Button from '../button'
 import FormInput from '../formInput'
@@ -19,15 +22,18 @@ const defaultFormFields = {
 }
 
 const SignInForm = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [formFields, setFormFields] = useState(defaultFormFields)
   const { email, password } = formFields
+  const currentUser = useSelector(selectCurrentUser)
 
   const resetForm = () => {
     setFormFields(defaultFormFields)
   }
 
   const signInWithGoogle = async () => {
-    await signInWithGooglePopup()
+    dispatch(googleSignInstart())
   }
 
   const handleChange = event => {
@@ -38,25 +44,15 @@ const SignInForm = () => {
   const handleSubmit = async event => {
     event.preventDefault()
 
-    try {
-      await signInAuthUserWithEmailAndPassword(email, password)
-
-      resetForm()
-    } catch (error) {
-      switch (error.code) {
-        case 'auth/wrong-password':
-          // TODO implement toastfy instead alert
-          alert('Incorrect Password!')
-          break
-        case 'auth/user-not-found':
-          // TODO implement toastfy instead alert
-          alert('No user associated with this email!')
-          break
-        default:
-          console.error(error)
-      }
-    }
+    dispatch(emailSingInStart(email, password))
+    resetForm()
   }
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate('/')
+    }
+  }, [currentUser])
 
   return (
     <SignContainer>

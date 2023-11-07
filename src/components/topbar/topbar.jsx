@@ -1,9 +1,7 @@
-import { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { signOutUser } from '../../utils/firebase'
 
-import { setIsMobileOpen } from '../../store/actions/userActions'
+import { setIsMobileOpen, signOutStart } from '../../store/actions/userActions'
 import { setIsSearchOpen } from '../../store/actions/searchActions'
 import { setIsCartOpen } from '../../store/actions/cartActions'
 
@@ -30,6 +28,7 @@ const Topbar = () => {
   const toggleIsCartOpen = () => dispatch(setIsCartOpen(!isCartOpen))
   const toggleIsSearchOpen = () => dispatch(setIsSearchOpen(!isSearchOpen))
   const handleMobileMenu = () => dispatch(setIsMobileOpen(!isMobileOpen))
+  const signOutUser = () => dispatch(signOutStart())
 
   return (
     <TopbarContainer>

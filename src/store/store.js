@@ -1,8 +1,11 @@
 import { compose, legacy_createStore, applyMiddleware } from 'redux'
-import { rootReducer } from './rootReducer'
+import createSagaMiddleware from 'redux-saga'
 import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
-import thunk from 'redux-thunk'
+import { rootReducer } from './rootReducer'
+import { rootSaga } from './rootSaga'
+
+// defaults to localStorage for web
+import storage from 'redux-persist/lib/storage'
 
 const persistConfig = {
   key: 'root',
@@ -10,7 +13,9 @@ const persistConfig = {
   whitelist: ['cart'],
 }
 
-const middleWares = [thunk]
+const sagaMiddleware = createSagaMiddleware()
+
+const middleWares = [sagaMiddleware]
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
@@ -27,5 +32,7 @@ export const store = legacy_createStore(
   undefined,
   composedEnhancers,
 )
+
+sagaMiddleware.run(rootSaga)
 
 export const persistor = persistStore(store)

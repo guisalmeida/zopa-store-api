@@ -4,8 +4,8 @@ import { FormGroup, Input, FormLabel } from './styled'
 const FormInput = ({ label, name, ...otherProps }) => {
   return (
     <FormGroup>
-      {label && <FormLabel id={name}>{label}</FormLabel>}
-      <Input name={name} {...otherProps} />
+      {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+      <Input name={name} id={name} {...otherProps} />
     </FormGroup>
   )
 }
