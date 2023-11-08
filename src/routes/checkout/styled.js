@@ -18,6 +18,7 @@ export const CheckoutContainer = styled.div`
     margin-top: 30px;
     margin-left: auto;
     font-size: 2rem;
+    font-weight: bolder;
 
     ${media.lessThan('medium')`
       margin: 1rem auto;

@@ -7,6 +7,7 @@ import {
   selectIsCartOpen,
   selectCartProducts,
 } from '../../store/selectors/cartSelectors'
+import { selectCurrentUser } from '../../store/selectors/userSelectors'
 
 import Slider from '../slider'
 import Button from '../button'
@@ -16,17 +17,21 @@ import { CartEmpty } from './styled'
 
 const MiniCart = () => {
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
+  const currentUser = useSelector(selectCurrentUser)
   const cartProducts = useSelector(selectCartProducts)
   const cartCount = useSelector(selectCartCount)
   const isCartOpen = useSelector(selectIsCartOpen)
 
   const pathname = window.location.pathname || undefined
-  const navigate = useNavigate()
 
   const handleCheckout = () => {
     dispatch(setIsCartOpen(false))
-    navigate('checkout')
+    if (!currentUser) {
+      navigate('auth/sign-in')
+    } else {
+      navigate('checkout')
+    }
   }
   const handleShowCart = bool => dispatch(setIsCartOpen(bool))
 

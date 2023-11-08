@@ -1,5 +1,4 @@
-import Autoplay from '../../../node_modules/swiper/modules/autoplay.min.mjs'
-import EffectFade from '../../../node_modules/swiper/modules/effect-fade.min.mjs'
+import { Autoplay, EffectFade } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/css'
