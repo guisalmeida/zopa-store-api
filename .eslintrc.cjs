@@ -6,7 +6,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
@@ -18,18 +18,18 @@ module.exports = {
       { allowConstantExport: true },
     ],
     'react/react-in-jsx-scope': 'off',
-    'react/jsx-first-prop-new-line': 'multiprop',
-    "prettier/prettier": [
-      "error",
+    'react/jsx-first-prop-new-line': 'off',
+    'prettier/prettier': [
+      'error',
       {
-        "trailingComma": "all",
-        "tabWidth": 2,
-        "semi": false,
-        "singleQuote": true,
-        "bracketSpacing": true,
-        "eslintIntegration": true,
-        "printWidth": 120
-      }
-    ]
+        trailingComma: 'all',
+        tabWidth: 2,
+        semi: false,
+        singleQuote: true,
+        bracketSpacing: true,
+        eslintIntegration: true,
+        printWidth: 120,
+      },
+    ],
   },
 }
