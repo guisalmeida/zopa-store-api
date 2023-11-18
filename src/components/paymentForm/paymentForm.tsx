@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setCartProducts } from '../../store/actions/cartActions'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 import {
   useElements,
   useStripe,
@@ -8,6 +9,8 @@ import {
   AddressElement,
   LinkAuthenticationElement,
 } from '@stripe/react-stripe-js'
+
+import { setCartProducts } from '../../store/actions/cartActions'
 
 import {
   PaymentFormContainer,
@@ -17,6 +20,7 @@ import {
 } from './styled'
 
 export const PaymentForm = (): React.JSX.Element => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const stripe = useStripe()
   const elements = useElements()
@@ -26,6 +30,13 @@ export const PaymentForm = (): React.JSX.Element => {
     event.preventDefault()
     if (!stripe || !elements) return
     setIsProcessingPayment(true)
+
+    const id = toast.loading('Processando pagamento...', {
+      position: 'top-center',
+      autoClose: 3000,
+      pauseOnHover: false,
+      draggable: false,
+    })
 
     await stripe
       .confirmPayment({
@@ -39,10 +50,29 @@ export const PaymentForm = (): React.JSX.Element => {
           result.paymentIntent &&
           result.paymentIntent.status === 'succeeded'
         ) {
-          alert('Pagamento efetuado com sucesso!')
+          toast.update(id, {
+            render: 'Pagamento efetuado com sucesso!',
+            type: 'success',
+            isLoading: false,
+            position: 'top-center',
+            autoClose: 3000,
+            hideProgressBar: true,
+            pauseOnHover: false,
+            draggable: false,
+          })
           dispatch(setCartProducts([]))
+          navigate('/')
         } else if (result.error) {
-          alert(result.error.message)
+          toast.update(id, {
+            render: 'Falha no pagamento, verifique seus dados.',
+            type: 'error',
+            isLoading: false,
+            position: 'top-center',
+            autoClose: 3000,
+            hideProgressBar: true,
+            pauseOnHover: false,
+            draggable: false,
+          })
         }
       })
 

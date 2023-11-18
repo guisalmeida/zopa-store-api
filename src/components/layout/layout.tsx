@@ -1,4 +1,6 @@
 import { Outlet } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+
 import BottomBar from '../bottomBar'
 import Topbar from '../topbar'
 import MiniCart from '../miniCart'
@@ -8,6 +10,7 @@ import MenuMobile from '../menuMobile'
 const Layout = () => {
   return (
     <>
+      <ToastContainer />
       <MiniCart />
       <Search />
       <MenuMobile />

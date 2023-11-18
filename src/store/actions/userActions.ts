@@ -2,6 +2,7 @@ import { USER_ACTION_TYPE, TActionWithPayload, TAction } from './actionTypes'
 import { createAction, withMatcher } from '../../utils/action'
 import { TUserData } from '../../utils/firebase'
 import { User } from 'firebase/auth'
+import { FirebaseError } from 'firebase/app'
 
 export type TSetIsMobileOpen = TActionWithPayload<
   typeof USER_ACTION_TYPE.SET_IS_MOBILE_OPEN,
@@ -28,7 +29,7 @@ export type TSignInSuccess = TActionWithPayload<
 
 export type TSignInFailed = TActionWithPayload<
   typeof USER_ACTION_TYPE.SIGN_IN_FAILED,
-  Error
+  FirebaseError
 >
 
 export type TSignUpStart = TActionWithPayload<
@@ -47,7 +48,7 @@ export type TSignUpSuccess = TActionWithPayload<
 
 export type TSignUpFailed = TActionWithPayload<
   typeof USER_ACTION_TYPE.SIGN_UP_FAILED,
-  Error
+  FirebaseError
 >
 
 export type TSignOutStart = TAction<typeof USER_ACTION_TYPE.SIGN_OUT_START>
@@ -56,7 +57,7 @@ export type TSignOutSuccess = TAction<typeof USER_ACTION_TYPE.SIGN_OUT_SUCCESS>
 
 export type TSignOutFailed = TActionWithPayload<
   typeof USER_ACTION_TYPE.SIGN_OUT_FAILED,
-  Error
+  FirebaseError
 >
 
 export const setIsMobileOpen = withMatcher(
@@ -83,7 +84,7 @@ export const signInSuccess = withMatcher(
 )
 
 export const signInFailed = withMatcher(
-  (error: Error): TSignInFailed =>
+  (error: FirebaseError): TSignInFailed =>
     createAction(USER_ACTION_TYPE.SIGN_IN_FAILED, error),
 )
 
@@ -102,7 +103,7 @@ export const signUpSuccess = withMatcher(
 )
 
 export const signUpFailed = withMatcher(
-  (error: Error): TSignUpFailed =>
+  (error: FirebaseError): TSignUpFailed =>
     createAction(USER_ACTION_TYPE.SIGN_UP_FAILED, error),
 )
 
@@ -115,6 +116,6 @@ export const signOutSuccess = withMatcher(
 )
 
 export const signOutFailed = withMatcher(
-  (error: Error): TSignOutFailed =>
+  (error: FirebaseError): TSignOutFailed =>
     createAction(USER_ACTION_TYPE.SIGN_OUT_FAILED, error),
 )

@@ -1,6 +1,8 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+
 import { signUpStart, googleSignInstart } from '../../store/actions/userActions'
 import { selectCurrentUser } from '../../store/selectors/userSelectors'
 
@@ -41,8 +43,13 @@ const SignUpForm = () => {
     event.preventDefault()
 
     if (password !== confirmPassword) {
-      // TODO implement toastfy instead alert
-      alert('Password do not match!')
+      toast.warn('Senha não confere!', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: true,
+        pauseOnHover: false,
+        draggable: false,
+      })
       return
     }
 

@@ -1,4 +1,5 @@
 import { takeLatest, all, call, put } from 'typed-redux-saga'
+import { toast } from 'react-toastify'
 
 import {
   signInFailed,
@@ -25,6 +26,7 @@ import {
   signOutUser,
 } from '../../utils/firebase'
 import { User } from 'firebase/auth'
+import { FirebaseError } from 'firebase/app'
 
 export function* getSnapshotFromUserAuth(
   userAuth: User,
@@ -40,7 +42,7 @@ export function* getSnapshotFromUserAuth(
       yield* put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }))
     }
   } catch (error) {
-    yield* put(signInFailed(error as Error))
+    yield* put(signInFailed(error as FirebaseError))
   }
 }
 
@@ -50,7 +52,7 @@ export function* isUserAuthenticated() {
     if (!userAuth) return
     yield* call(getSnapshotFromUserAuth, userAuth)
   } catch (error) {
-    yield* put(signInFailed(error as Error))
+    yield* put(signInFailed(error as FirebaseError))
   }
 }
 
@@ -63,7 +65,7 @@ export function* signInWithGoogle() {
     const { user } = yield* call(signInWithGooglePopup)
     yield* call(getSnapshotFromUserAuth, user)
   } catch (error) {
-    yield* put(signInFailed(error as Error))
+    yield* put(signInFailed(error as FirebaseError))
   }
 }
 
@@ -82,7 +84,7 @@ export function* signInWithEmail({
       yield* call(getSnapshotFromUserAuth, user)
     }
   } catch (error) {
-    yield* put(signInFailed(error as Error))
+    yield* put(signInFailed(error as FirebaseError))
   }
 }
 
@@ -101,7 +103,7 @@ export function* signUpWithEmail({
       yield* put(signUpSuccess(user, { displayName }))
     }
   } catch (error) {
-    yield* put(signUpFailed(error as Error))
+    yield* put(signUpFailed(error as FirebaseError))
   }
 }
 
@@ -132,7 +134,7 @@ export function* signOut() {
     yield* call(signOutUser)
     yield* put(signOutSuccess())
   } catch (error) {
-    yield* put(signOutFailed(error as Error))
+    yield* put(signOutFailed(error as FirebaseError))
   }
 }
 
@@ -140,10 +142,27 @@ export function* onSignOutStart() {
   yield* takeLatest('SIGN_OUT_START', signOut)
 }
 
+const showErrorToast = (error: FirebaseError) => {
+  let msg = ''
+  if (error.code === 'auth/wrong-password') {
+    msg = 'Senha inválida!'
+  } else {
+    msg = error.message
+  }
+
+  return toast.error(msg, {
+    position: 'top-center',
+    autoClose: 3000,
+    hideProgressBar: true,
+    pauseOnHover: false,
+    draggable: false,
+  })
+}
+
 export function* showError({
   payload,
 }: TSignInFailed | TSignOutFailed | TSignUpFailed) {
-  yield* call(alert, payload.message)
+  yield* call(showErrorToast, payload)
 }
 
 export function* onSignInFailed() {
