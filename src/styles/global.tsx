@@ -24,6 +24,8 @@ const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 400;
 }
 
 *,
