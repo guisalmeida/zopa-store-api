@@ -1,4 +1,5 @@
 import { takeLatest, all, call, put } from 'typed-redux-saga'
+import { FirebaseError } from 'firebase/app'
 
 import { getProductsCollection } from '../../utils/firebase'
 import {
@@ -11,7 +12,7 @@ export function* fetchProductsAsync() {
     const products = yield* call(getProductsCollection)
     yield* put(fetchProductsSuccess(products))
   } catch (error) {
-    yield* put(fetchProductsFailed(error as Error))
+    yield* put(fetchProductsFailed(error as FirebaseError))
   }
 }
 

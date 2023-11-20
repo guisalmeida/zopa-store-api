@@ -1,3 +1,4 @@
+import { FirebaseError } from 'firebase/app'
 import { TProduct } from '../../types'
 import { createAction, withMatcher } from '../../utils/action'
 import {
@@ -17,7 +18,7 @@ export type TFetchProductsSuccess = TActionWithPayload<
 
 export type TFetchProductsFailed = TActionWithPayload<
   typeof PRODUCTS_ACTION_TYPE.FETCH_PRODUCTS_FAILED,
-  Error
+  FirebaseError
 >
 
 export const fetchProductsStart = withMatcher(
@@ -31,6 +32,6 @@ export const fetchProductsSuccess = withMatcher(
 )
 
 export const fetchProductsFailed = withMatcher(
-  (error: Error): TFetchProductsFailed =>
+  (error: FirebaseError): TFetchProductsFailed =>
     createAction(PRODUCTS_ACTION_TYPE.FETCH_PRODUCTS_FAILED, error),
 )

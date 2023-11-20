@@ -13,6 +13,7 @@ import Spinner from '../../components/spinner/spinner'
 
 import { ProductContainer } from './styled'
 import { TProduct } from '../../types'
+import { toast } from 'react-toastify'
 
 type TProductRouteParams = {
   category: string
@@ -57,6 +58,13 @@ const Product = () => {
 
     dispatch(setIsCartOpen(true))
     dispatch(addToCart(cartProducts, product))
+    toast.success('Produto adicionado ao carrinho!', {
+      position: 'top-center',
+      autoClose: 3000,
+      hideProgressBar: true,
+      pauseOnHover: false,
+      draggable: false,
+    })
     setSelectedSize('')
   }
 
