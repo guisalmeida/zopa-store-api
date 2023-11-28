@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
 export type OrderType = {
   userId: string;
@@ -27,4 +27,6 @@ const OrderSchema = new Schema<OrderType>(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Order", OrderSchema);
+const OrderModel = model("order", OrderSchema);
+
+export default OrderModel;

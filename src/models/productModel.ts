@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
 export type ProductType = {
   name: string;
@@ -29,12 +29,16 @@ const ProductsSchema = new Schema<ProductType>(
     color: { type: String, required: true },
     price: { type: Number, required: true },
     oldPrice: { type: Number, required: true },
-    sizes: [{
-      available: { type: Boolean, required: true },
-      size: { type: String, required: true },
-    }],
+    sizes: [
+      {
+        available: { type: Boolean, required: true },
+        size: { type: String, required: true },
+      },
+    ],
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Product", ProductsSchema);
+const ProductModel = model("product", ProductsSchema);
+
+export default ProductModel;

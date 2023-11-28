@@ -1,10 +1,10 @@
-import { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
 export type CartType = {
   userId: string;
   products: {
-    productId: string,
-    quantity: number
+    productId: string;
+    quantity: number;
   }[];
 };
 
@@ -21,4 +21,6 @@ const CartSchema = new Schema<CartType>(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Cart", CartSchema);
+const CartModel = model("cart", CartSchema);
+
+export default CartModel;
