@@ -11,7 +11,7 @@ export type OrderType = {
   status: string;
 };
 
-const OrderSchema = new Schema<OrderType>(
+const orderSchema = new Schema<OrderType>(
   {
     userId: { type: String, required: true },
     products: [
@@ -27,6 +27,6 @@ const OrderSchema = new Schema<OrderType>(
   { timestamps: true }
 );
 
-const OrderModel = model("order", OrderSchema);
+const OrderModel = model("order", orderSchema);
 
 export default OrderModel;

@@ -17,7 +17,7 @@ export type ProductType = {
   }[];
 };
 
-const ProductsSchema = new Schema<ProductType>(
+const productsSchema = new Schema<ProductType>(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
@@ -39,6 +39,6 @@ const ProductsSchema = new Schema<ProductType>(
   { timestamps: true }
 );
 
-const ProductModel = model("product", ProductsSchema);
+const ProductModel = model("product", productsSchema);
 
 export default ProductModel;

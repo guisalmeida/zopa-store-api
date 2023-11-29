@@ -8,7 +8,7 @@ export type CartType = {
   }[];
 };
 
-const CartSchema = new Schema<CartType>(
+const cartSchema = new Schema<CartType>(
   {
     userId: { type: String, required: true },
     products: [
@@ -21,6 +21,6 @@ const CartSchema = new Schema<CartType>(
   { timestamps: true }
 );
 
-const CartModel = model("cart", CartSchema);
+const CartModel = model("cart", cartSchema);
 
 export default CartModel;
