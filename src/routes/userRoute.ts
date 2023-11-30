@@ -1,5 +1,5 @@
-import express, { Request, Response } from "express";
+import { Router } from "express";
 
-const userRouter = express.Router();
+const userRouter = Router();
 
 export default userRouter;

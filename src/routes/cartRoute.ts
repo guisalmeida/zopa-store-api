@@ -1,6 +1,6 @@
-import express, { Request, Response } from "express";
+import { Router } from "express";
 
-const cartRouter = express.Router();
+const cartRouter = Router();
 
 
 

@@ -1,7 +1,5 @@
-import express, { Request, Response } from "express";
+import { Router } from "express";
 
-const productRouter = express.Router();
-
-
+const productRouter = Router();
 
 export default productRouter;
