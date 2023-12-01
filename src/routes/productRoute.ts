@@ -4,9 +4,9 @@ import { createProduct, deleteProduct, getAllProducts, getProduct, updateProduct
 
 const productRouter = Router();
 
-productRouter.get("/", authenticate, getAllProducts);
+productRouter.get("/", getAllProducts);
 productRouter.post("/", authenticate, createProduct);
-productRouter.get("/:id", authenticate, getProduct);
+productRouter.get("/:id", getProduct);
 productRouter.put("/:id", authenticate, updateProduct);
 productRouter.delete("/:id", authenticate, deleteProduct);
 
