@@ -32,7 +32,7 @@ export async function generateToken({
   return token;
 }
 
-export function verifyToken(token: string) {
+export function verifyToken(token: string): TokenPayloadParamsType & Error {
   return jwt.verify(
     token,
     process.env.JWT_SECRET,
