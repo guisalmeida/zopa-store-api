@@ -1,20 +1,21 @@
 import { Response, Request } from "express";
 import { HydratedDocument } from "mongoose";
 
-import User, { UserType } from "../models/userModel";
+import UserModel, { UserType } from "../models/userModel";
 import { generateToken } from "../utils";
 
 const bcrypt = require("bcrypt");
 
-export async function register(req: Request, res: Response) {
-  const newUser: HydratedDocument<UserType> = new User({
+export async function registerUser(req: Request, res: Response) {
+  const newUser: HydratedDocument<UserType> = new UserModel({
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
+    passwordChangedAt: new Date(),
   });
 
   try {
-    const hasEmail = await User.findOne({ email: req.body.email });
+    const hasEmail = await UserModel.findOne({ email: req.body.email });
     if (hasEmail) {
       return res.status(400).json({
         error: true,
@@ -29,11 +30,11 @@ export async function register(req: Request, res: Response) {
   }
 }
 
-export async function login(req: Request, res: Response) {
+export async function logUser(req: Request, res: Response) {
   const { email, password }: UserType = req.body;
 
   try {
-    const dbUser = await User.findOne({ email });
+    const dbUser = await UserModel.findOne({ email });
 
     if (!dbUser) {
       return res.status(400).json({
@@ -57,9 +58,9 @@ export async function login(req: Request, res: Response) {
     });
 
     // @ts-ignore
-    const { password: pass, ...restUser } = dbUser._doc;
-    restUser.accessToken = accessToken;
-    return res.status(200).json(restUser);
+    delete dbUser.password;
+    dbUser.accessToken = accessToken;
+    return res.status(200).json(dbUser);
   } catch (error) {
     res.status(500).json(error as Error);
   }

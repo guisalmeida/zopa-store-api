@@ -10,7 +10,7 @@ const routes = Router();
 routes.use("/api/users", userRouter);
 routes.use("/api/auth", authRoute);
 routes.use("/api/cart", cartRouter);
-routes.use("/api/order", orderRouter);
-routes.use("/api/product", productRouter);
+routes.use("/api/orders", orderRouter);
+routes.use("/api/products", productRouter);
 
 export default routes;
