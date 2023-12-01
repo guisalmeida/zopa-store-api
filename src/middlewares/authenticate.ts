@@ -35,7 +35,17 @@ export default async function authenticate(
 
   const isAuthenticate: TokenPayloadParamsType & JsonWebTokenErrorType =
     verifyToken(token);
+
   if (isAuthenticate.name === "JsonWebTokenError") {
+    return next(
+      res.status(401).json({
+        error: true,
+        message: isAuthenticate.message,
+      })
+    );
+  }
+
+  if (isAuthenticate.name === "TokenExpiredError") {
     return next(
       res.status(401).json({
         error: true,
@@ -65,7 +75,6 @@ export default async function authenticate(
         res.status(403).json({ error: true, message: "Token expirado." })
       );
   }
-  console.log('auth');
-  
+
   return next();
 }

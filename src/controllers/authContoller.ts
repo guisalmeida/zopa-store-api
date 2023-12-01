@@ -59,8 +59,9 @@ export async function logUser(req: Request, res: Response) {
 
     // @ts-ignore
     delete dbUser.password;
-    dbUser.accessToken = accessToken;
-    return res.status(200).json(dbUser);
+    
+    // @ts-ignore
+    return res.status(200).json({ ...dbUser._doc, accessToken });
   } catch (error) {
     res.status(500).json(error as Error);
   }

@@ -23,43 +23,38 @@ export async function getProduct(req: Request, res: Response) {
   }
 }
 
-export async function getAllUsers(req: Request, res: Response) {
+export async function getAllProducts(req: Request, res: Response) {
   const query = req.query;
-  try {
-    const users =
-      query && query.limit
-        ? await ProductModel.find().sort().limit(Number(query.limit))
-        : await ProductModel.find();
+  const category = req.query.category || "";
 
-    res.status(200).json(users);
+  try {
+    if (category && query && query.limit) {
+      const products = await ProductModel.find({
+        categories: { $in: [category] },
+      }).limit(Number(query.limit));
+
+      return res.status(200).json(products);
+
+    } else if (category) {
+      const products = await ProductModel.find({
+        categories: { $in: [category] },
+      });
+      return res.status(200).json(products);
+
+    } else if (query && query.limit) {
+      const products = await ProductModel.find().limit(Number(query.limit));
+      return res.status(200).json(products);
+
+    } else {
+      const products = await ProductModel.find();
+      return res.status(200).json(products);
+    }
   } catch (error) {
     res.status(500).json(error as Error);
   }
 }
 
-export async function getStats(req: Request, res: Response) {
-  const date = new Date();
-  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
-  console.log("teste");
-
-  try {
-    const data = await ProductModel.aggregate([
-      { $match: { createdAt: { $gte: lastYear } } },
-      { $project: { month: { $month: "$createdAt" } } },
-      { $group: { _id: "$month", total: { $sum: 1 } } },
-    ]);
-
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(500).json(error as Error);
-  }
-}
-
-export async function updateUser(req: Request, res: Response) {
-  if (req.body.password) {
-    req.body.passwordChangedAt = new Date();
-  }
-
+export async function updateProduct(req: Request, res: Response) {
   try {
     const updatedUser = await ProductModel.findByIdAndUpdate(
       req.params.id,
@@ -72,10 +67,10 @@ export async function updateUser(req: Request, res: Response) {
   }
 }
 
-export async function deleteUser(req: Request, res: Response) {
+export async function deleteProduct(req: Request, res: Response) {
   try {
     await ProductModel.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "Usuário deletado com sucesso!" });
+    res.status(200).json({ message: "Produto deletado com sucesso!" });
   } catch (error) {
     res.status(500).json(error as Error);
   }
