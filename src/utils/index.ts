@@ -7,9 +7,11 @@ export async function hashPassword(password: string): Promise<string | null> {
   return await bcrypt.hash(password, 8);
 }
 
-type TokenPayloadParamsType = {
+export type TokenPayloadParamsType = {
   id: Types.ObjectId;
   isAdmin: boolean;
+  iat?: number;
+  ext?: number;
 };
 
 export async function generateToken({

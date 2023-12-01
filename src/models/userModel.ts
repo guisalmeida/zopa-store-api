@@ -6,6 +6,8 @@ export type UserType = {
   email: string;
   password: string;
   isAdmin: boolean;
+  accessToken?: string;
+  passwordChangedAt?: Date;
 };
 
 const userSchema = new Schema<UserType>(
@@ -14,6 +16,7 @@ const userSchema = new Schema<UserType>(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true, minlength: 8 },
     isAdmin: { type: Boolean, default: false },
+    passwordChangedAt: { type: Date },
   },
   { timestamps: true }
 );
@@ -21,11 +24,11 @@ const userSchema = new Schema<UserType>(
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
-  const hashedPassword = await hashPassword(this.password);
+  const hashedPassword = await hashPassword(this.password || "");
   if (hashedPassword) {
     this.password = hashedPassword;
   }
-  
+
   next();
 });
 
