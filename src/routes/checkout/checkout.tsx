@@ -43,7 +43,7 @@ const Checkout = (): React.JSX.Element => {
   useEffect(() => {
     const getClientSecret = async () => {
       const response = await fetch(
-        '/.netlify/functions/create-payment-intent',
+        'http://localhost:5000/api/checkout/create-payment-intent',
         {
           method: 'post',
           headers: {
@@ -53,7 +53,7 @@ const Checkout = (): React.JSX.Element => {
         },
       ).then(res => res.json())
 
-      setClientSecret(response.paymentIntent.client_secret)
+      setClientSecret(response.clientSecret)
     }
     getClientSecret()
   }, [])
