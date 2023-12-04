@@ -31,7 +31,6 @@ export async function getAllUsers(req: Request, res: Response) {
 export async function getStats(req: Request, res: Response) {
   const date = new Date();
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
-  console.log('teste');
   
   try {
     
