@@ -1,13 +1,15 @@
 import express, { Express } from "express";
 import mongoose from "mongoose";
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
 import routes from "./routes";
+
+const cors = require("cors");
 
 dotenv.config();
 
 mongoose.set("strictQuery", false);
 mongoose
-  .connect(process.env.MONGO_DB_URL || '')
+  .connect(process.env.MONGO_DB_URL || "")
   .then(() => {
     console.log("DB connection successful!");
   })
@@ -17,8 +19,9 @@ mongoose
 
 const app: Express = express();
 
-app.use(express.json())
-app.use(routes)
+app.use(cors());
+app.use(express.json());
+app.use(routes);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("server running...");

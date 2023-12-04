@@ -10,8 +10,8 @@ import {
 
 const cartRouter = Router();
 
+cartRouter.post("/",  createCart);
 cartRouter.get("/", authenticate, getAllCarts);
-cartRouter.post("/", authenticate, createCart);
 cartRouter.get("/:id", authenticate, getCart);
 cartRouter.put("/:id", authenticate, updateCart);
 cartRouter.delete("/:id", authenticate, deleteCart);
