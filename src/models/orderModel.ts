@@ -7,7 +7,13 @@ export type OrderType = {
     quantity: number;
   }[];
   amount: number;
-  address: Object;
+  address: {
+    city: string;
+    state: string;
+    line1: string;
+    line2: string;
+    zipcode: string;
+  };
   status: string;
 };
 
@@ -21,7 +27,13 @@ const orderSchema = new Schema<OrderType>(
       },
     ],
     amount: { type: Number, required: true },
-    address: { type: Object, required: true },
+    address: {
+      city: { type: String, required: true },
+      state: { type: String, required: true },
+      line1: { type: String, required: true },
+      line2: { type: String, required: true },
+      zipcode: { type: String, required: true },
+    },
     status: { type: String, default: "Processing" },
   },
   { timestamps: true }
