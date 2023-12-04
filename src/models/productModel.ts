@@ -8,7 +8,7 @@ export type ProductType = {
   images: string[];
   categories: string[];
   discount: number;
-  color: string;
+  color: string[];
   price: number;
   oldPrice: number;
   sizes: {
@@ -26,7 +26,7 @@ const productsSchema = new Schema<ProductType>(
     images: { type: [String], required: true },
     categories: { type: [String], required: true },
     discount: { type: Number, required: true },
-    color: { type: String, required: true },
+    color: [{ type: String, required: true }],
     price: { type: Number, required: true },
     oldPrice: { type: Number, required: true },
     sizes: [
