@@ -1,5 +1,6 @@
 import { Response, Request } from "express";
 import UserModel from "../models/userModel";
+import { hashPassword } from "../utils";
 
 export async function getUser(req: Request, res: Response) {
   try {
@@ -31,15 +32,14 @@ export async function getAllUsers(req: Request, res: Response) {
 export async function getStats(req: Request, res: Response) {
   const date = new Date();
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
-  
+
   try {
-    
     const data = await UserModel.aggregate([
       { $match: { createdAt: { $gte: lastYear } } },
       { $project: { month: { $month: "$createdAt" } } },
-      { $group: { _id: "$month", total: {$sum: 1} } },
+      { $group: { _id: "$month", total: { $sum: 1 } } },
     ]);
-    
+
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json(error as Error);
@@ -49,6 +49,9 @@ export async function getStats(req: Request, res: Response) {
 export async function updateUser(req: Request, res: Response) {
   if (req.body.password) {
     req.body.passwordChangedAt = new Date();
+    
+    const hashedPassword = await hashPassword(req.body.password);
+    req.body.password = hashedPassword;
   }
 
   try {
@@ -57,7 +60,11 @@ export async function updateUser(req: Request, res: Response) {
       { $set: req.body },
       { new: true }
     );
-    res.status(200).json(updatedUser);
+
+    // @ts-ignore
+    const { password: pass, ...restUser } = updatedUser._doc;
+
+    return res.status(200).json(restUser);
   } catch (error) {
     res.status(500).json(error as Error);
   }
