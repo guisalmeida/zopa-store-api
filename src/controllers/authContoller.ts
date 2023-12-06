@@ -59,7 +59,6 @@ export async function logUser(req: Request, res: Response) {
 
     // @ts-ignore
     const { password: pass, ...restUser } = dbUser._doc;
-    console.log(restUser);
     
     return res.status(200).json({ ...restUser, accessToken });
   } catch (error) {
