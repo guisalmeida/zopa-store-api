@@ -8,13 +8,14 @@ export type ProductType = {
   images: string[];
   categories: string[];
   discount: number;
-  color: string[];
+  colors: string[];
   price: number;
   oldPrice: number;
   sizes: {
     available: boolean;
     size: string;
   }[];
+  inStock: boolean;
 };
 
 const productsSchema = new Schema<ProductType>(
@@ -26,7 +27,7 @@ const productsSchema = new Schema<ProductType>(
     images: { type: [String], required: true },
     categories: { type: [String], required: true },
     discount: { type: Number, required: true },
-    color: [{ type: String, required: true }],
+    colors: [{ type: String, required: true }],
     price: { type: Number, required: true },
     oldPrice: { type: Number, required: true },
     sizes: [
@@ -35,6 +36,7 @@ const productsSchema = new Schema<ProductType>(
         size: { type: String, required: true },
       },
     ],
+    inStock: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

@@ -25,7 +25,7 @@ export async function getProduct(req: Request, res: Response) {
 
 export async function getAllProducts(req: Request, res: Response) {
   const query = req.query;
-  const category = req.query.category || "";
+  const category = query.category || "";
 
   try {
     if (category && query && query.limit) {
