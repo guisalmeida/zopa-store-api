@@ -58,10 +58,10 @@ export async function logUser(req: Request, res: Response) {
     });
 
     // @ts-ignore
-    delete dbUser.password;
+    const { password: pass, ...restUser } = dbUser._doc;
+    console.log(restUser);
     
-    // @ts-ignore
-    return res.status(200).json({ ...dbUser._doc, accessToken });
+    return res.status(200).json({ ...restUser, accessToken });
   } catch (error) {
     res.status(500).json(error as Error);
   }
