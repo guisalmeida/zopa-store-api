@@ -12,7 +12,8 @@ export type OrderType = {
     state: string;
     line1: string;
     line2: string;
-    zipcode: string;
+    postal_code: string;
+    country: string;
   };
   status: string;
 };
@@ -29,10 +30,11 @@ const orderSchema = new Schema<OrderType>(
     amount: { type: Number, required: true },
     address: {
       city: { type: String, required: true },
+      country: { type: String, required: true },
       state: { type: String, required: true },
       line1: { type: String, required: true },
       line2: { type: String, required: true },
-      zipcode: { type: String, required: true },
+      postal_code: { type: String, required: true },
     },
     status: { type: String, default: "Processing" },
   },

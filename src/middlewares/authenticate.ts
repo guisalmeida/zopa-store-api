@@ -67,6 +67,7 @@ export default async function authenticate(
   }
 
   const dbUser = await UserModel.findById(isAuthenticate.id);
+
   if (dbUser?.passwordChangedAt && isAuthenticate.iat) {
     const passTimestamp = Math.trunc(dbUser.passwordChangedAt.getTime() / 1000);
 
