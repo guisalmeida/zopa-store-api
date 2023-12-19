@@ -1,5 +1,5 @@
-import { TProduct } from '../../types'
-import { createAction, withMatcher } from '../../utils/action'
+import { TOrder, TProduct } from '../../types'
+import { createAction, withMatcher } from '../../utils/actions'
 import { CART_ACTION_TYPE, TActionWithPayload } from './actionTypes'
 
 export type TSetIsCartOpen = TActionWithPayload<
@@ -11,6 +11,34 @@ export type TSetCartProducts = TActionWithPayload<
   typeof CART_ACTION_TYPE.SET_CART_PRODUCTS,
   TProduct[]
 >
+
+export type TCreateOrderStart = TActionWithPayload<
+  typeof CART_ACTION_TYPE.CREATE_ORDER_START,
+  TOrder
+>
+export type TCreateOrderSuccess = TActionWithPayload<
+  typeof CART_ACTION_TYPE.CREATE_ORDER_SUCCESS,
+  TOrder[]
+>
+export type TCreateOrderFailed = TActionWithPayload<
+  typeof CART_ACTION_TYPE.CREATE_ORDER_FAILED,
+  Error
+>
+
+export const createOrderStart = withMatcher(
+  (order: TOrder): TCreateOrderStart =>
+    createAction(CART_ACTION_TYPE.CREATE_ORDER_START, order),
+)
+
+export const createOrderSuccess = withMatcher(
+  (orders: TOrder[]): TCreateOrderSuccess =>
+    createAction(CART_ACTION_TYPE.CREATE_ORDER_SUCCESS, orders),
+)
+
+export const createOrderFailed = withMatcher(
+  (error: Error): TCreateOrderFailed =>
+    createAction(CART_ACTION_TYPE.CREATE_ORDER_FAILED, error),
+)
 
 export const setIsCartOpen = withMatcher(
   (bool: boolean): TSetIsCartOpen =>

@@ -1,10 +1,7 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import {
-  googleSignInstart,
-  emailSingInStart,
-} from '../../store/actions/userActions'
+import { singInStart } from '../../store/actions/userActions'
 
 import { selectCurrentUser } from '../../store/selectors/userSelectors'
 
@@ -13,7 +10,7 @@ import FormInput from '../formInput'
 
 import {
   SignContainer,
-  ButtonsContaner,
+  ButtonsContainer,
 } from '../../routes/authentication/styled'
 
 const defaultFormFields = {
@@ -32,10 +29,6 @@ const SignInForm = (): React.JSX.Element => {
     setFormFields(defaultFormFields)
   }
 
-  const signInWithGoogle = async (): Promise<void> => {
-    dispatch(googleSignInstart())
-  }
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target
     setFormFields({ ...formFields, [name]: value })
@@ -46,13 +39,13 @@ const SignInForm = (): React.JSX.Element => {
   ): Promise<void> => {
     event.preventDefault()
 
-    dispatch(emailSingInStart(email, password))
+    dispatch(singInStart(email, password))
     resetForm()
   }
 
   useEffect(() => {
     if (currentUser) {
-      navigate('/')
+      navigate('/auth/user')
     }
   }, [currentUser])
 
@@ -82,14 +75,11 @@ const SignInForm = (): React.JSX.Element => {
           onChange={handleChange}
           required
         />
-        <ButtonsContaner>
+        <ButtonsContainer>
           <Button buttonType="base" type="submit">
             Entrar
           </Button>
-          <Button buttonType="google" type="button" onClick={signInWithGoogle}>
-            Entrar com Google
-          </Button>
-        </ButtonsContaner>
+        </ButtonsContainer>
       </form>
     </SignContainer>
   )

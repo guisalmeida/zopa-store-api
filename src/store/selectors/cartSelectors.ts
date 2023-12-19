@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect'
-import { priceToNumber } from '../../utils/currency'
 import { TCartState } from '../reducers/cartReducer'
 import { TRootState } from '../store'
 
@@ -20,9 +19,7 @@ export const selectCartTotal = createSelector(
   cartProducts =>
     cartProducts
       ? cartProducts.reduce((total, cartItem) => {
-          return (
-            total + priceToNumber(cartItem.actual_price) * cartItem.quantity
-          )
+          return total + cartItem.price * cartItem.quantity
         }, 0)
       : [],
 )

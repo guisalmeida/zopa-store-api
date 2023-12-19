@@ -13,15 +13,15 @@ const ProductsList = ({
 }: ProductsListProps): React.JSX.Element => {
   const categoryProducts = category
     ? products.filter(product => {
-        return product.categories.includes(category)
-      })
+      return product.categories.includes(category)
+    })
     : null
 
   const prodsArray = categoryProducts || products || []
 
   return (
     <ProductsContainer>
-      {prodsArray.map((product, index) => {
+      {prodsArray.length && prodsArray.map((product, index) => {
         return <ProductCard key={index} product={product} />
       })}
     </ProductsContainer>

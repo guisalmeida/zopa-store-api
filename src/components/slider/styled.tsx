@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 type SliderContainerProps = {
   $show: boolean
+  $direction: string
 }
 
 export const SliderContainer = styled.div<SliderContainerProps>`
@@ -11,20 +12,20 @@ export const SliderContainer = styled.div<SliderContainerProps>`
   max-width: 412px;
   position: fixed;
   top: 0;
-  right: 0;
   z-index: 99;
-  transform: translateX(100%);
   transition: transform 0.3s ease-out;
   overflow: auto;
-  box-shadow: 10px 0px 30px var(--main-color);
 
   ${props =>
-    props.$show &&
-    `
-      transform: translateX(0);
-    `}
+    props.$direction === 'right' && `transform: translateX(100%); right: 0;`}
+
+  ${props =>
+    props.$direction === 'left' && `transform: translateX(-100%); left: 0;`};
+
+  ${props => props.$show && `transform: translateX(0);`}
 
   .slider__header {
+    position: relative;
     background: var(--main-color);
     color: var(--white);
     width: 100%;
@@ -33,15 +34,20 @@ export const SliderContainer = styled.div<SliderContainerProps>`
     padding: 0 1.6rem;
     display: flex;
     align-items: center;
+    justify-content: center;
 
     .slider__back {
+      position: absolute;
+      top: calc(50% - 9px);
       padding: 0;
-      margin-right: 1.6rem;
+      margin: 0;
       font-size: 1.8rem;
       height: 20px;
       display: flex;
       align-items: center;
       color: white;
+      ${props => props.$direction === 'right' && `left: 1rem;`}
+      ${props => props.$direction === 'left' && `right: 1rem;`};
 
       svg {
         width: 18px;
@@ -53,9 +59,7 @@ export const SliderContainer = styled.div<SliderContainerProps>`
       font-size: 1rem;
       font-weight: 700;
       margin: 0;
-      width: 100%;
       text-align: center;
-      transform: translateX(-18px);
     }
   }
 

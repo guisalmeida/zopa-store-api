@@ -16,7 +16,7 @@ import { ReactComponent as SearchIcon } from '../../assets/search-icon.svg'
 import { ReactComponent as ZopaLogo } from '../../assets/logo-zopa.svg'
 import CartIcon from '../cartIcon'
 
-import { TopbarContainer, MenuMobileIcon } from './styled'
+import { TopbarContainer, MenuMobileIcon, UserIcon } from './styled'
 
 const Topbar = (): React.JSX.Element => {
   const dispatch = useDispatch()
@@ -54,20 +54,20 @@ const Topbar = (): React.JSX.Element => {
 
         <div className="topbar__icons">
           {currentUser ? (
-            <button
-              type="button"
+            <Link
+              to="/auth/user"
               className="topbar__link"
-              onClick={signOutUser}
+              title="Ver meu perfil"
             >
-              Sair
-            </button>
+              <UserIcon />
+            </Link>
           ) : (
             <Link
               to="/auth/sign-in"
               className="topbar__link"
               title="Entrar na sua conta"
             >
-              Entrar
+              <UserIcon />
             </Link>
           )}
 

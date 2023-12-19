@@ -7,11 +7,13 @@ import {
   signOutFailed,
   signUpFailed,
   signInFailed,
+  updateSuccess,
+  deleteSuccess,
 } from '../actions/userActions'
-import { TUserData } from '../../utils/firebase'
+import { TCurrentUser } from '../../types'
 
 export type TUserState = {
-  readonly currentUser: TUserData | null
+  readonly currentUser: TCurrentUser | null
   readonly isMobileOpen: boolean
   readonly isLoading: boolean
   readonly error: Error | null
@@ -35,14 +37,14 @@ export const userReducer = (
     }
   }
 
-  if (signInSuccess.match(action)) {
+  if (signInSuccess.match(action) || updateSuccess.match(action)) {
     return {
       ...state,
       currentUser: action.payload,
     }
   }
 
-  if (signOutSuccess.match(action)) {
+  if (signOutSuccess.match(action) || deleteSuccess.match(action)) {
     return {
       ...state,
       currentUser: null,

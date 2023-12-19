@@ -5,14 +5,17 @@ import 'react-toastify/dist/ReactToastify.css'
 const GlobalStyles = createGlobalStyle`
 
 :root {   
-    --sub-color: grey;
-    --main-color: black;
+    --main-color: #000000;
+    --sub-color: #808080;
+    --highlight: #4285f4;
+    --border: #e6e6e6;
+    
+    --black: #000000;
+    --white: #fff;
     --dark: #212529;
     --grey: #a7a7a7;
     --light-grey: #f9f9f9;
-    --white: #fff;
     --red: #cf3838;
-    --border: #e6e6e6;
 
     --break-small: 450px;
     --break-medium: 768px;

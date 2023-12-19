@@ -3,6 +3,7 @@ import Backdrop from '../backdrop'
 import { SliderContainer } from './styled'
 
 type SliderProps = {
+  direction: string
   show: boolean
   title: string
   children: React.ReactNode
@@ -10,6 +11,7 @@ type SliderProps = {
 }
 
 const Slider = ({
+  direction,
   show,
   title,
   children,
@@ -17,7 +19,7 @@ const Slider = ({
 }: SliderProps): React.JSX.Element => {
   return (
     <>
-      <SliderContainer $show={show}>
+      <SliderContainer $show={show} $direction={direction}>
         <header className="slider__header">
           <button className="slider__back" onClick={() => handleShow(false)}>
             &#10005;

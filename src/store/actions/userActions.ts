@@ -1,8 +1,7 @@
 import { USER_ACTION_TYPE, TActionWithPayload, TAction } from './actionTypes'
-import { createAction, withMatcher } from '../../utils/action'
-import { TUserData } from '../../utils/firebase'
-import { User } from 'firebase/auth'
-import { FirebaseError } from 'firebase/app'
+import { createAction, withMatcher } from '../../utils/actions'
+import { TCurrentUser } from '../../types'
+import { AxiosError } from 'axios'
 
 export type TSetIsMobileOpen = TActionWithPayload<
   typeof USER_ACTION_TYPE.SET_IS_MOBILE_OPEN,
@@ -13,23 +12,33 @@ export type TCheckUserSession = TAction<
   typeof USER_ACTION_TYPE.CHECK_USER_SESSION
 >
 
-export type TGoogleSignInstart = TAction<
-  typeof USER_ACTION_TYPE.GOOGLE_SIGNIN_START
->
-
-export type TEmailSingInStart = TActionWithPayload<
-  typeof USER_ACTION_TYPE.EMAIL_SIGNIN_START,
+export type TSingInStart = TActionWithPayload<
+  typeof USER_ACTION_TYPE.SIGN_IN_START,
   { email: string; password: string }
 >
-
 export type TSignInSuccess = TActionWithPayload<
   typeof USER_ACTION_TYPE.SIGN_IN_SUCCESS,
-  TUserData
+  TCurrentUser
 >
-
 export type TSignInFailed = TActionWithPayload<
   typeof USER_ACTION_TYPE.SIGN_IN_FAILED,
-  FirebaseError
+  Error
+>
+
+export type TUpdateStart = TActionWithPayload<
+  typeof USER_ACTION_TYPE.UPDATE_START,
+  {
+    email: string
+    username: string
+  }
+>
+export type TUpdateSuccess = TActionWithPayload<
+  typeof USER_ACTION_TYPE.UPDATE_SUCCESS,
+  TCurrentUser
+>
+export type TUpdateFailed = TActionWithPayload<
+  typeof USER_ACTION_TYPE.UPDATE_FAILED,
+  Error
 >
 
 export type TSignUpStart = TActionWithPayload<
@@ -37,27 +46,30 @@ export type TSignUpStart = TActionWithPayload<
   {
     email: string
     password: string
-    displayName: string
+    username: string
   }
 >
-
 export type TSignUpSuccess = TActionWithPayload<
   typeof USER_ACTION_TYPE.SIGN_UP_SUCCESS,
-  { user: User; additionalInfo: { [any: string]: string } }
+  TCurrentUser
 >
-
 export type TSignUpFailed = TActionWithPayload<
   typeof USER_ACTION_TYPE.SIGN_UP_FAILED,
-  FirebaseError
+  Error
 >
 
 export type TSignOutStart = TAction<typeof USER_ACTION_TYPE.SIGN_OUT_START>
-
 export type TSignOutSuccess = TAction<typeof USER_ACTION_TYPE.SIGN_OUT_SUCCESS>
-
 export type TSignOutFailed = TActionWithPayload<
   typeof USER_ACTION_TYPE.SIGN_OUT_FAILED,
-  FirebaseError
+  Error
+>
+
+export type TDeleteStart = TAction<typeof USER_ACTION_TYPE.DELETE_START>
+export type TDeleteSuccess = TAction<typeof USER_ACTION_TYPE.DELETE_SUCCESS>
+export type TDeleteFailed = TActionWithPayload<
+  typeof USER_ACTION_TYPE.DELETE_FAILED,
+  Error
 >
 
 export const setIsMobileOpen = withMatcher(
@@ -69,41 +81,55 @@ export const checkUserSession = withMatcher(
   (): TCheckUserSession => createAction(USER_ACTION_TYPE.CHECK_USER_SESSION),
 )
 
-export const googleSignInstart = withMatcher(
-  (): TGoogleSignInstart => createAction(USER_ACTION_TYPE.GOOGLE_SIGNIN_START),
-)
-
-export const emailSingInStart = withMatcher(
-  (email: string, password: string): TEmailSingInStart =>
-    createAction(USER_ACTION_TYPE.EMAIL_SIGNIN_START, { email, password }),
+export const singInStart = withMatcher(
+  (email: string, password: string): TSingInStart =>
+    createAction(USER_ACTION_TYPE.SIGN_IN_START, { email, password }),
 )
 
 export const signInSuccess = withMatcher(
-  (user: TUserData & { id: string }): TSignInSuccess =>
+  (user: TCurrentUser): TSignInSuccess =>
     createAction(USER_ACTION_TYPE.SIGN_IN_SUCCESS, user),
 )
 
 export const signInFailed = withMatcher(
-  (error: FirebaseError): TSignInFailed =>
+  (error: Error | AxiosError): TSignInFailed =>
     createAction(USER_ACTION_TYPE.SIGN_IN_FAILED, error),
 )
 
 export const signUpStart = withMatcher(
-  (email: string, password: string, displayName: string): TSignUpStart =>
+  (email: string, password: string, username: string): TSignUpStart =>
     createAction(USER_ACTION_TYPE.SIGN_UP_START, {
       email,
       password,
-      displayName,
+      username,
     }),
 )
 
+export const updateStart = withMatcher(
+  (email: string, username: string): TUpdateStart =>
+    createAction(USER_ACTION_TYPE.UPDATE_START, {
+      email,
+      username,
+    }),
+)
+
+export const updateSuccess = withMatcher(
+  (user: TCurrentUser): TUpdateSuccess =>
+    createAction(USER_ACTION_TYPE.UPDATE_SUCCESS, user),
+)
+
+export const updateFailed = withMatcher(
+  (error: Error): TUpdateFailed =>
+    createAction(USER_ACTION_TYPE.UPDATE_FAILED, error),
+)
+
 export const signUpSuccess = withMatcher(
-  (user: User, additionalInfo: { [any: string]: string }): TSignUpSuccess =>
-    createAction(USER_ACTION_TYPE.SIGN_UP_SUCCESS, { user, additionalInfo }),
+  (user: TCurrentUser): TSignUpSuccess =>
+    createAction(USER_ACTION_TYPE.SIGN_UP_SUCCESS, user),
 )
 
 export const signUpFailed = withMatcher(
-  (error: FirebaseError): TSignUpFailed =>
+  (error: Error): TSignUpFailed =>
     createAction(USER_ACTION_TYPE.SIGN_UP_FAILED, error),
 )
 
@@ -116,6 +142,19 @@ export const signOutSuccess = withMatcher(
 )
 
 export const signOutFailed = withMatcher(
-  (error: FirebaseError): TSignOutFailed =>
+  (error: Error): TSignOutFailed =>
     createAction(USER_ACTION_TYPE.SIGN_OUT_FAILED, error),
+)
+
+export const deleteStart = withMatcher(
+  (): TDeleteStart => createAction(USER_ACTION_TYPE.DELETE_START),
+)
+
+export const deleteSuccess = withMatcher(
+  (): TDeleteSuccess => createAction(USER_ACTION_TYPE.DELETE_SUCCESS),
+)
+
+export const deleteFailed = withMatcher(
+  (error: Error): TDeleteFailed =>
+    createAction(USER_ACTION_TYPE.DELETE_FAILED, error),
 )

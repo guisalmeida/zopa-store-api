@@ -1,15 +1,15 @@
 import { ButtonHTMLAttributes } from 'react'
 import {
   BaseButton,
-  GoogleButton,
-  InvertedButton,
+  HighlightButton,
+  WarnButton,
   ButtonSpinner,
 } from './styled'
 
 const BUTTON_TYPE_CLASSES = {
   base: BaseButton,
-  google: GoogleButton,
-  inverted: InvertedButton,
+  highlight: HighlightButton,
+  warn: WarnButton,
 } as const
 
 type ButtonProps = {

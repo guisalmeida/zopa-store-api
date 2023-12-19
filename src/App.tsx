@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom'
 import { fetchProductsStart } from './store/actions/productsActions'
 import { checkUserSession } from './store/actions/userActions'
 import Spinner from './components/spinner/spinner'
+import User from './routes/user'
 
 const Home = lazy(() => import('./routes/home'))
 const Layout = lazy(() => import('./components/layout'))
@@ -39,6 +40,7 @@ function App() {
           <Route path="product/:id" element={<Product />} />
 
           <Route path="auth/*" element={<Authentication />}>
+            <Route path="user" element={<User />} />
             <Route path="sign-in" element={<SignInForm />} />
             <Route path="sign-up" element={<SignUpForm />} />
           </Route>

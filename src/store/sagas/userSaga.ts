@@ -8,149 +8,125 @@ import {
   signOutFailed,
   signUpSuccess,
   signUpFailed,
-  TEmailSingInStart,
+  TSingInStart,
   TSignUpStart,
-  TSignUpSuccess,
   TSignInFailed,
   TSignOutFailed,
   TSignUpFailed,
+  TUpdateStart,
+  updateSuccess,
+  deleteSuccess,
+  updateFailed,
 } from '../actions/userActions'
 
-import {
-  TAdditionalInfo,
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-  getCurrentUser,
-  signInAuthUserWithEmailAndPassword,
-  signInWithGooglePopup,
-  signOutUser,
-} from '../../utils/firebase'
-import { User } from 'firebase/auth'
-import { FirebaseError } from 'firebase/app'
+import { deleteUser, signInUser, signUpUser, updateUser } from '../../utils/api'
+import axios, { AxiosError } from 'axios'
 
-export function* getSnapshotFromUserAuth(
-  userAuth: User,
-  additionalInfo?: TAdditionalInfo,
-) {
+export function* signInSaga({ payload: { email, password } }: TSingInStart) {
   try {
-    const userSnapshot = yield* call(
-      createUserDocumentFromAuth,
-      userAuth,
-      additionalInfo,
-    )
-    if (userSnapshot) {
-      yield* put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }))
+    const res = yield* call(signInUser, email, password)
+
+    if (axios.isAxiosError(res)) {
+      yield* put(signInFailed(res.response?.data as AxiosError))
+    } else if (res.status === 200) {
+      const user = res.data
+      yield* put(signInSuccess(user))
     }
   } catch (error) {
-    yield* put(signInFailed(error as FirebaseError))
+    yield* put(signInFailed(error as Error))
   }
 }
 
-export function* isUserAuthenticated() {
-  try {
-    const userAuth = yield* call(getCurrentUser)
-    if (!userAuth) return
-    yield* call(getSnapshotFromUserAuth, userAuth)
-  } catch (error) {
-    yield* put(signInFailed(error as FirebaseError))
-  }
+export function* onSignInStart() {
+  yield* takeLatest('SIGN_IN_START', signInSaga)
 }
 
-export function* onCheckUserSession() {
-  yield* takeLatest('CHECK_USER_SESSION', isUserAuthenticated)
-}
-
-export function* signInWithGoogle() {
-  try {
-    const { user } = yield* call(signInWithGooglePopup)
-    yield* call(getSnapshotFromUserAuth, user)
-  } catch (error) {
-    yield* put(signInFailed(error as FirebaseError))
-  }
-}
-
-export function* signInWithEmail({
-  payload: { email, password },
-}: TEmailSingInStart) {
-  try {
-    const userCredential = yield* call(
-      signInAuthUserWithEmailAndPassword,
-      email,
-      password,
-    )
-
-    if (userCredential) {
-      const { user } = userCredential
-      yield* call(getSnapshotFromUserAuth, user)
-    }
-  } catch (error) {
-    yield* put(signInFailed(error as FirebaseError))
-  }
-}
-
-export function* signUpWithEmail({
-  payload: { email, password, displayName },
+export function* signUpSaga({
+  payload: { email, password, username },
 }: TSignUpStart) {
   try {
-    const userCredential = yield* call(
-      createAuthUserWithEmailAndPassword,
-      email,
-      password,
-    )
+    const res = yield* call(signUpUser, username, email, password)
 
-    if (userCredential) {
-      const { user } = userCredential
-      yield* put(signUpSuccess(user, { displayName }))
+    if (axios.isAxiosError(res)) {
+      yield* put(signUpFailed(res.response?.data as AxiosError))
+    } else if (res.status === 201) {
+      const user = res.data
+      yield* put(signUpSuccess(user))
     }
   } catch (error) {
-    yield* put(signUpFailed(error as FirebaseError))
+    yield* put(signUpFailed(error as Error))
   }
-}
-
-export function* signInAfterSignUp({
-  payload: { user, additionalInfo },
-}: TSignUpSuccess) {
-  yield* call(getSnapshotFromUserAuth, user, additionalInfo)
-}
-
-export function* onSignUpSuccess() {
-  yield* takeLatest('SIGN_UP_SUCCESS', signInAfterSignUp)
 }
 
 export function* onSignUpStart() {
-  yield* takeLatest('SIGN_UP_START', signUpWithEmail)
+  yield* takeLatest('SIGN_UP_START', signUpSaga)
 }
 
-export function* onEmailSignInStart() {
-  yield* takeLatest('EMAIL_SIGNIN_START', signInWithEmail)
-}
-
-export function* onGoogleSignInStart() {
-  yield* takeLatest('GOOGLE_SIGNIN_START', signInWithGoogle)
-}
-
-export function* signOut() {
+export function* updateUserSaga({
+  payload: { email, username },
+}: TUpdateStart) {
   try {
-    yield* call(signOutUser)
+    const res = yield* call(updateUser, email, username)
+    if (axios.isAxiosError(res)) {
+      yield* put(updateFailed(res.response?.data as AxiosError))
+    } else if (res.data) {
+      yield* put(updateSuccess(res.data))
+    }
+  } catch (error) {
+    yield* put(updateFailed(error as Error))
+  }
+}
+
+export function* onUpdateStart() {
+  yield* takeLatest('UPDATE_START', updateUserSaga)
+}
+
+// export function* isUserAuthenticated() {
+//   try {
+//     const isUserAuth = yield* call(verifyToken, 'token')
+//     if (isUserAuth.name === 'TokenExpiredError') {
+//       yield* put(signInFailed(isUserAuth.message as VerifyErrors))
+//     }
+//   } catch (error) {
+//     yield* put(signInFailed(error as AxiosError))
+//   }
+// }
+
+// export function* onCheckUserSession() {
+//   yield* takeLatest('CHECK_USER_SESSION', isUserAuthenticated)
+// }
+
+export function* signOutSaga() {
+  try {
     yield* put(signOutSuccess())
   } catch (error) {
-    yield* put(signOutFailed(error as FirebaseError))
+    yield* put(signOutFailed(error as Error))
   }
 }
 
 export function* onSignOutStart() {
-  yield* takeLatest('SIGN_OUT_START', signOut)
+  yield* takeLatest('SIGN_OUT_START', signOutSaga)
 }
 
-const showErrorToast = (error: FirebaseError) => {
-  let msg = ''
-  if (error.code === 'auth/wrong-password') {
-    msg = 'Senha inválida!'
-  } else {
-    msg = error.message
+export function* deleteUserSaga() {
+  try {
+    const res = yield* call(deleteUser)
+    if (axios.isAxiosError(res)) {
+      yield* put(signInFailed(res.response?.data as AxiosError))
+    } else if (res.data) {
+      yield* put(deleteSuccess())
+    }
+  } catch (error) {
+    yield* put(signOutFailed(error as Error))
   }
+}
 
-  return toast.error(msg, {
+export function* onDeleteStart() {
+  yield* takeLatest('DELETE_START', deleteUserSaga)
+}
+
+const showErrorToast = (error: Error) => {
+  return toast.error(error.message, {
     position: 'top-center',
     autoClose: 3000,
     hideProgressBar: true,
@@ -177,16 +153,20 @@ export function* onSignOutFailed() {
   yield* takeLatest('SIGN_OUT_FAILED', showError)
 }
 
+export function* onDeleteFailed() {
+  yield* takeLatest('DELETE_FAILED', showError)
+}
+
 export function* userSaga() {
   yield* all([
-    call(onCheckUserSession),
-    call(onGoogleSignInStart),
-    call(onEmailSignInStart),
+    call(onUpdateStart),
+    call(onDeleteStart),
+    call(onSignInStart),
     call(onSignUpStart),
-    call(onSignUpSuccess),
     call(onSignOutStart),
     call(onSignInFailed),
     call(onSignUpFailed),
     call(onSignOutFailed),
+    call(onDeleteFailed),
   ])
 }

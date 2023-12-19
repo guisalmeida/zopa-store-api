@@ -38,6 +38,7 @@ const MiniCart = (): React.JSX.Element => {
 
   return (
     <Slider
+      direction="right"
       show={isCartOpen}
       handleShow={handleShowCart}
       title={`Carrinho - ${cartCount} Ite${cartCount === 1 ? 'm' : 'ns'}`}

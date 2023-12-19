@@ -1,9 +1,9 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
-import { signUpStart, googleSignInstart } from '../../store/actions/userActions'
+import { signUpStart } from '../../store/actions/userActions'
 import { selectCurrentUser } from '../../store/selectors/userSelectors'
 
 import Button from '../button'
@@ -11,11 +11,11 @@ import FormInput from '../formInput'
 
 import {
   SignContainer,
-  ButtonsContaner,
+  ButtonsContainer,
 } from '../../routes/authentication/styled'
 
 const defaultFormFields = {
-  displayName: '',
+  username: '',
   email: '',
   password: '',
   confirmPassword: '',
@@ -25,7 +25,7 @@ const SignUpForm = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [formFields, setFormFields] = useState(defaultFormFields)
-  const { displayName, email, password, confirmPassword } = formFields
+  const { username, email, password, confirmPassword } = formFields
   const currentUser = useSelector(selectCurrentUser)
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -53,12 +53,8 @@ const SignUpForm = () => {
       return
     }
 
-    dispatch(signUpStart(email, password, displayName))
+    dispatch(signUpStart(email, password, username))
     resetForm()
-  }
-
-  const signUpWithGoogle = async (): Promise<void> => {
-    dispatch(googleSignInstart())
   }
 
   useEffect(() => {
@@ -78,8 +74,8 @@ const SignUpForm = () => {
         <FormInput
           label="Nome"
           type="text"
-          name="displayName"
-          value={displayName}
+          name="username"
+          value={username}
           placeholder="Digite seu nome..."
           onChange={handleChange}
           required
@@ -115,14 +111,11 @@ const SignUpForm = () => {
           required
         />
 
-        <ButtonsContaner>
+        <ButtonsContainer>
           <Button buttonType="base" type="submit">
             Cadastrar
           </Button>
-          <Button buttonType="google" type="button" onClick={signUpWithGoogle}>
-            Cadastre-se com Google
-          </Button>
-        </ButtonsContaner>
+        </ButtonsContainer>
       </form>
     </SignContainer>
   )

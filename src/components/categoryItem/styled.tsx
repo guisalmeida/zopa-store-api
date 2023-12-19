@@ -22,7 +22,7 @@ export const CategoryItemBodyContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  border: 1px solid var(--black);
   background-color: white;
   opacity: 1;
   position: absolute;
@@ -47,7 +47,7 @@ export const CategoryItemContainer = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  border: 1px solid var(--black);
   margin: 0 30px 15px;
   overflow: hidden;
 

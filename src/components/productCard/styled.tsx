@@ -65,7 +65,6 @@ export const ProductCardContainer = styled.div`
       font-weight: bold;
 
       &--old {
-        font-size: 0.75rem;
         color: var(--grey);
         text-decoration: line-through;
         margin-right: 1rem;

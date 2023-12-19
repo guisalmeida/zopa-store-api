@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { clearFromCart } from '../../store/actions/cartActions'
 
-import { priceToNumber, priceToStringBr } from '../../utils/currency'
+import { priceToStringBr } from '../../utils/currency'
 import { selectCartProducts } from '../../store/selectors/cartSelectors'
 import { TProduct } from '../../types'
 
@@ -26,7 +26,7 @@ const ListItem = ({ item, mode }: ListItemProps): React.JSX.Element => {
   const handleDelete = () => dispatch(clearFromCart(cartProducts, item))
 
   const { size } = item.selectedSize
-    ? item.sizes.find(size => size.sku === item.selectedSize) || {
+    ? item.sizes.find(size => size._id === item.selectedSize) || {
         size: undefined,
       }
     : { size: undefined }
@@ -36,7 +36,7 @@ const ListItem = ({ item, mode }: ListItemProps): React.JSX.Element => {
       <ListItemFigure>
         <img
           src={
-            item?.image ||
+            item?.images[0] ||
             'https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indispon%C3%ADvel'
           }
           alt={item?.name}
@@ -61,13 +61,13 @@ const ListItem = ({ item, mode }: ListItemProps): React.JSX.Element => {
             <RemoveIcon />
           </button>
         )}
-        {item?.on_sale && (
+        {item?.onSale && (
           <p className="list__price list__price--old">
-            {priceToStringBr(priceToNumber(item.regular_price) * item.quantity)}
+            {priceToStringBr(item.oldPrice * item.quantity)}
           </p>
         )}
         <p className="list__price">
-          {priceToStringBr(priceToNumber(item.actual_price) * item.quantity)}
+          {priceToStringBr(item.price * item.quantity)}
         </p>
         {/* <p className="list__price list__price--installments">
           {item?.installments}

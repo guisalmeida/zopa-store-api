@@ -8,7 +8,7 @@ export const CartIconCounter = styled.sup`
   width: 1.25rem;
   height: 1.25rem;
   border-radius: 50%;
-  background: #cf3838;
+  background: var(--red);
   color: #fff;
   line-height: 1.25rem;
   text-align: center;

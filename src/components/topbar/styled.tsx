@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import media from 'styled-media-query'
 import { Menu } from '@styled-icons/zondicons/Menu'
+import { UserCircle } from '@styled-icons/boxicons-regular/UserCircle'
 
 export const TopbarContainer = styled.header`
   width: 100%;
@@ -56,7 +57,7 @@ export const TopbarContainer = styled.header`
 
     .topbar__link {
       text-decoration: none;
-      color: black;
+      color: var(--black);
       cursor: pointer;
       font-size: 1rem;
 
@@ -96,7 +97,7 @@ export const TopbarContainer = styled.header`
 
     .topbar__link {
       text-decoration: none;
-      color: black;
+      color: var(--black);
       cursor: pointer;
       margin-right: 1.5rem;
 
@@ -115,4 +116,10 @@ export const TopbarContainer = styled.header`
 
 export const MenuMobileIcon = styled(Menu)`
   color: var(--dark);
+`
+
+export const UserIcon = styled(UserCircle)`
+  color: var(--dark);
+  width: 1.6rem;
+  height: 1.6rem;
 `

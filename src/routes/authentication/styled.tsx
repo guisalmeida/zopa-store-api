@@ -16,9 +16,9 @@ export const SignContainer = styled.div`
   width: var(--break-small);
 
   ${media.lessThan('medium')`
-        width: 100%;
-        padding:1rem;
-    `}
+    width: 100%;
+    padding:1rem;
+  `}
 
   h2 {
     margin: 10px 0;
@@ -33,7 +33,7 @@ export const SignContainer = styled.div`
   }
 `
 
-export const ButtonsContaner = styled.div`
+export const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 2rem 0 0;

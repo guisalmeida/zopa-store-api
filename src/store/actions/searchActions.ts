@@ -1,6 +1,6 @@
 import { TActionWithPayload, SEARCH_ACTION_TYPE } from './actionTypes'
 import { TProduct } from '../../types'
-import { createAction, withMatcher } from '../../utils/action'
+import { createAction, withMatcher } from '../../utils/actions'
 
 export type TSetIsSearchOpen = TActionWithPayload<
   typeof SEARCH_ACTION_TYPE.SET_IS_SEARCH_OPEN,

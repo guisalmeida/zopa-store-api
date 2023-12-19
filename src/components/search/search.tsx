@@ -51,6 +51,7 @@ const Search = (): React.JSX.Element => {
 
   return (
     <Slider
+      direction="right"
       show={isSearchOpen}
       title="Busca por produtos"
       handleShow={handleShowSearch}
@@ -79,7 +80,7 @@ const Search = (): React.JSX.Element => {
             searchProducts.map((prod, index) => (
               <Link
                 className="search__link"
-                to={`product/${prod.code_color}`}
+                to={`product/${prod._id}`}
                 key={index}
                 onClick={() => handleShowSearch(false)}
               >

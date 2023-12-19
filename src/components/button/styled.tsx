@@ -6,10 +6,9 @@ export const BaseButton = styled.button`
   width: auto;
   height: 50px;
   letter-spacing: 0.5px;
-  line-height: 50px;
   padding: 0 35px 0 35px;
   font-size: 1rem;
-  background-color: black;
+  background-color: var(--black);
   color: white;
   text-transform: uppercase;
   font-weight: bolder;
@@ -24,33 +23,31 @@ export const BaseButton = styled.button`
   @media (hover: hover) {
     &:hover {
       background-color: var(--grey);
-      color: black;
+      color: var(--black);
     }
   }
 `
 
-export const GoogleButton = styled(BaseButton)`
-  background-color: #4285f4;
+export const HighlightButton = styled(BaseButton)`
+  background-color: var(--highlight);
   color: white;
 
   @media (hover: hover) {
     &:hover {
-      background-color: #357ae8;
       border: none;
     }
   }
 `
 
-export const InvertedButton = styled(BaseButton)`
-  background-color: white;
-  color: black;
-  border: 1px solid black;
+export const WarnButton = styled(BaseButton)`
+  background-color: var(--white);
+  color: var(--red);
+  border: 1px solid var(--red);
 
   @media (hover: hover) {
     &:hover {
-      background-color: black;
-      color: white;
-      border: none;
+      background-color: var(--red);
+      color: var(--white);
     }
   }
 `

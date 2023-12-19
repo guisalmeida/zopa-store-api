@@ -16,9 +16,11 @@ const CategoriesBar = (): React.JSX.Element => {
   const allProducts: TProduct[] = useSelector(selectAllProducts)
   const categoriesSet: Set<string> = new Set()
 
-  allProducts.forEach(product => {
-    product.categories.forEach(cat => categoriesSet.add(cat))
-  })
+  if (allProducts.length) {
+    allProducts.forEach(product => {
+      product.categories.forEach(cat => categoriesSet.add(cat))
+    })
+  }
 
   return (
     <ProductsCategories>

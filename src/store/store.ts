@@ -22,7 +22,7 @@ type TExtendedPersistConfig = PersistConfig<TRootState> & {
 const persistConfig: TExtendedPersistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cart'],
+  whitelist: ['cart', 'user'],
 }
 
 const sagaMiddleware = createSagaMiddleware()

@@ -35,13 +35,13 @@ const firebaseConfig = {
 }
 
 export type TAdditionalInfo = {
-  displayName?: string
+  username?: string
 }
 
 export type TUserData = {
   createdAt: Date
   email: string
-  displayName: string
+  username: string
 }
 
 export type TObjectToAdd = {
