@@ -8,6 +8,7 @@ export type UserType = {
   isAdmin: boolean;
   accessToken?: string;
   passwordChangedAt?: Date;
+  phone: string;
 };
 
 const userSchema = new Schema<UserType>(
@@ -17,6 +18,7 @@ const userSchema = new Schema<UserType>(
     password: { type: String, required: true, minlength: 8 },
     isAdmin: { type: Boolean, default: false },
     passwordChangedAt: { type: Date },
+    phone: { type: String, required: true },
   },
   { timestamps: true }
 );

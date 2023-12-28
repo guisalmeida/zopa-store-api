@@ -11,6 +11,7 @@ export async function registerUser(req: Request, res: Response) {
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
+    phone: req.body.phone,
     passwordChangedAt: new Date(),
   });
 
@@ -59,7 +60,7 @@ export async function logUser(req: Request, res: Response) {
 
     // @ts-ignore
     const { password: pass, ...restUser } = dbUser._doc;
-    
+
     return res.status(200).json({ ...restUser, accessToken });
   } catch (error) {
     res.status(500).json(error as Error);
