@@ -1,13 +1,4 @@
 import { Types } from "mongoose";
-import { S3Client } from "@aws-sdk/client-s3";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-const BUCKET_NAME = process.env.BUCKET_NAME;
-const REGION = process.env.REGION;
-const S3_USER_ACCESS_KEY = process.env.S3_USER_ACCESS_KEY;
-const S3_USER_SECRET_KEY = process.env.S3_USER_SECRET_KEY;
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -52,13 +43,3 @@ export function verifyToken(token: string): TokenPayloadParamsType & Error {
     }
   );
 }
-
-export const s3Config = {
-  region: REGION,
-  credentials: {
-    accessKeyId: S3_USER_ACCESS_KEY as string,
-    secretAccessKey: S3_USER_SECRET_KEY as string,
-  },
-};
-
-export const s3Client = new S3Client(s3Config);
