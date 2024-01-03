@@ -17,7 +17,7 @@ export function uploadFilesToAWS(req: Request, res: Response) {
     .json({ message: "Imagens salvas com sucesso!", files: req.files });
 }
 
-export async function deleteFilesFromAWS(req: Request, res: Response) {
+export async function deleteImagesFromAWS(req: Request, res: Response) {
   if (!req.body.keys || req.body.keys.length === 0) {
     return res.status(400).json({ message: "Bad request" });
   }

@@ -3,7 +3,7 @@ import { Router } from "express";
 import { uploadMiddleware } from "../middlewares/uploadImage";
 import authenticate from "../middlewares/authenticate";
 import {
-  deleteFilesFromAWS,
+  deleteImagesFromAWS,
   uploadFilesToAWS,
 } from "../controllers/imagesController";
 
@@ -16,6 +16,6 @@ imagesRoute.post(
   uploadFilesToAWS
 );
 
-imagesRoute.delete("/delete", authenticate, deleteFilesFromAWS);
+imagesRoute.delete("/delete", authenticate, deleteImagesFromAWS);
 
 export default imagesRoute;
