@@ -8,12 +8,12 @@ import {
   deleteUser,
 } from "../controllers/userController";
 
-const userRouter = Router();
+const usersRouter = Router();
 
-userRouter.get("/", authenticate, getAllUsers);
-userRouter.get("/stats", authenticate, getStats);
-userRouter.get("/:id", authenticate, getUser);
-userRouter.put("/:id", authenticate, updateUser);
-userRouter.delete("/:id", authenticate, deleteUser);
+usersRouter.get("/", authenticate, getAllUsers);
+usersRouter.get("/stats", authenticate, getStats);
+usersRouter.get("/:id", authenticate, getUser);
+usersRouter.put("/:id", authenticate, updateUser);
+usersRouter.delete("/:id", authenticate, deleteUser);
 
-export default userRouter;
+export default usersRouter;
