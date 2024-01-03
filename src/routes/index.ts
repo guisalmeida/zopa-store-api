@@ -1,18 +1,20 @@
 import { Router } from "express";
 import authRoute from "./authRoute";
-import userRouter from "./userRoute";
+import usersRouter from "./userRoute";
 import cartRouter from "./cartRoute";
-import orderRouter from "./orderRoute";
-import productRouter from "./productRoute";
+import ordersRouter from "./orderRoute";
+import productsRouter from "./productRoute";
 import paymentRouter from "./paymentRoute";
+import imagesRouter from "./imagesRoute";
 
 const routes = Router();
 
-routes.use("/api/users", userRouter);
+routes.use("/api/users", usersRouter);
 routes.use("/api/auth", authRoute);
 routes.use("/api/cart", cartRouter);
-routes.use("/api/orders", orderRouter);
-routes.use("/api/products", productRouter);
+routes.use("/api/orders", ordersRouter);
+routes.use("/api/products", productsRouter);
 routes.use("/api/checkout", paymentRouter);
+routes.use("/api/images", imagesRouter);
 
 export default routes;

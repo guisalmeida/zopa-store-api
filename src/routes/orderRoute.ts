@@ -9,13 +9,13 @@ import {
 } from "../controllers/orderController";
 import authenticate from "../middlewares/authenticate";
 
-const orderRouter = Router();
+const ordersRouter = Router();
 
-orderRouter.get("/", authenticate, getAllOrders);
-orderRouter.post("/:id", authenticate, createOrder);
-orderRouter.get("/income", authenticate, getIncome);
-orderRouter.get("/:id", authenticate, getOrder);
-orderRouter.put("/:id", authenticate, updateOrder);
-orderRouter.delete("/:id", authenticate, deleteOrder);
+ordersRouter.get("/", authenticate, getAllOrders);
+ordersRouter.post("/:id", authenticate, createOrder);
+ordersRouter.get("/income", authenticate, getIncome);
+ordersRouter.get("/:id", authenticate, getOrder);
+ordersRouter.put("/:id", authenticate, updateOrder);
+ordersRouter.delete("/:id", authenticate, deleteOrder);
 
-export default orderRouter;
+export default ordersRouter;

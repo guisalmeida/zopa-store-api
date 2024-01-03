@@ -1,4 +1,4 @@
-import { HydratedDocument, Types } from "mongoose";
+import { HydratedDocument } from "mongoose";
 import { Response, Request } from "express";
 import CartModel, { CartType } from "../models/cartModel";
 import { verifyToken } from "../utils";
