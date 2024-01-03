@@ -5,6 +5,7 @@ import cartRouter from "./cartRoute";
 import ordersRouter from "./orderRoute";
 import productsRouter from "./productRoute";
 import paymentRouter from "./paymentRoute";
+import imagesRouter from "./imagesRoute";
 
 const routes = Router();
 
@@ -14,5 +15,6 @@ routes.use("/api/cart", cartRouter);
 routes.use("/api/orders", ordersRouter);
 routes.use("/api/products", productsRouter);
 routes.use("/api/checkout", paymentRouter);
+routes.use("/api/images", imagesRouter);
 
 export default routes;
