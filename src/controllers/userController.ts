@@ -49,7 +49,7 @@ export async function getStats(req: Request, res: Response) {
 export async function updateUser(req: Request, res: Response) {
   if (req.body.password) {
     req.body.passwordChangedAt = new Date();
-    
+
     const hashedPassword = await hashPassword(req.body.password);
     req.body.password = hashedPassword;
   }

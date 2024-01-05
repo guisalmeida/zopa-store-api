@@ -12,6 +12,7 @@ export async function registerUser(req: Request, res: Response) {
     email: req.body.email,
     password: req.body.password,
     phone: req.body.phone,
+    isAdmin: req.body.isAdmin ? req.body.isAdmin : false,
     passwordChangedAt: new Date(),
   });
 
