@@ -31,7 +31,7 @@ export async function getAllOrders(req: Request, res: Response) {
       const orders = await OrderModel.find().limit(Number(query.limit));
       return res.status(200).json(orders);
     } else {
-      const orders = await OrderModel.find();
+      const orders = await OrderModel.find().sort({ createdAt: -1 });
       return res.status(200).json(orders);
     }
   } catch (error) {
