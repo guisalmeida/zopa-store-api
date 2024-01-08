@@ -20,8 +20,10 @@ export async function getAllUsers(req: Request, res: Response) {
   try {
     const users =
       query && query.limit
-        ? await UserModel.find().sort().limit(Number(query.limit))
-        : await UserModel.find();
+        ? await UserModel.find()
+            .sort({ createdAt: -1 })
+            .limit(Number(query.limit))
+        : await UserModel.find().sort({ createdAt: -1 });
 
     res.status(200).json(users);
   } catch (error) {
