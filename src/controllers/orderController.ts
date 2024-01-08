@@ -70,20 +70,20 @@ export async function getIncome(req: Request, res: Response) {
     const income = await OrderModel.aggregate([
       { $match: { createdAt: { $gte: previousMonth } } },
       {
-        $group: {
-          _id: { month: { $month: "$createdAt" }, createdAt: "$createdAt" },
-          total: { $sum: "$amount" },
-        },
-      },
-      { $sort: { "_id.createdAt": 1 } },
-      {
         $project: {
-          _id: 0,
-          month: "$_id.month",
-          total: 1,
-          createdAt: "$_id.createdAt",
+          createdAt: 1,
+          month: { $month: "$createdAt" },
+          sales: "$amount",
         },
       },
+      {
+        $group: {
+          _id: "$month",
+          total: { $sum: "$sales" },
+          createdAt: { $first: "$createdAt" },
+        },
+      },
+      { $sort: { createdAt: 1 } },
     ]);
 
     res.status(200).json(income);
