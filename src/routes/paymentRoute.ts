@@ -8,7 +8,7 @@ import {
 const paymentRouter = Router();
 
 paymentRouter.post("/create-payment-intent", createPaymentIntent);
-paymentRouter.get("/cancel", getSuccess);
-paymentRouter.get("/success", getCancel);
+paymentRouter.get("/success", getSuccess);
+paymentRouter.get("/cancel", getCancel);
 
 export default paymentRouter;
