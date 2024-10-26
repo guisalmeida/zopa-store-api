@@ -9,6 +9,9 @@ import imagesRouter from "./imagesRoute";
 
 const routes = Router();
 
+routes.get("/api", (req, res) =>
+  res.status(200).json({ message: "API running succesfully" })
+);
 routes.use("/api/users", usersRouter);
 routes.use("/api/auth", authRoute);
 routes.use("/api/cart", cartRouter);
