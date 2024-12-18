@@ -1,21 +1,19 @@
 import { Router } from "express";
-import authRoute from "./authRoute";
-import usersRouter from "./userRoute";
-import cartRouter from "./cartRoute";
-import ordersRouter from "./orderRoute";
-import productsRouter from "./productRoute";
-import paymentRouter from "./paymentRoute";
-import imagesRouter from "./imagesRoute";
+import authRoute from "./authRoutes";
+import usersRouter from "./userRoutes";
+import cartRouter from "./cartRoutes";
+import ordersRouter from "./orderRoutes";
+import productsRouter from "./productRoutes";
+import paymentRouter from "./paymentRoutes";
+import imagesRouter from "./imagesRoutes";
 
 const routes = Router();
 
 routes.get("/api", (req, res) =>
-  res
-    .status(200)
-    .json({
-      message: "API running succesfully",
-      version: process.env.API_VERSION,
-    })
+  res.status(200).json({
+    message: "API running succesfully",
+    version: process.env.API_VERSION,
+  })
 );
 routes.use(`/api/${process.env.API_VERSION}/users`, usersRouter);
 routes.use(`/api/${process.env.API_VERSION}/auth`, authRoute);

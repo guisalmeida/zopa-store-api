@@ -10,7 +10,7 @@ import {
 
 const cartRouter = Router();
 
-cartRouter.post("/",  createCart);
+cartRouter.post("/", createCart);
 cartRouter.get("/", authenticate, getAllCarts);
 cartRouter.get("/:id", authenticate, getCart);
 cartRouter.put("/:id", authenticate, updateCart);
